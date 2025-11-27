@@ -201,6 +201,77 @@ body {
   filter: invert(1);
 }
 
+/* sheet inferior busqueda */
+
+.search-header { 
+  padding: 4px 4px 10px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 12px; 
+}
+
+.search-title { 
+  font-size: 16px; 
+  font-weight: 600; 
+  margin: 0; 
+}
+
+.search-input-wrapper { 
+  background: #f5f5f5; 
+  border-radius: 12px; 
+  padding: 14px 18px; 
+  display: flex; 
+}
+
+.search-input { 
+  flex: 1; 
+  background: transparent; 
+  border: 0; 
+  font-size: 16px; 
+  font-family: var(--font-family); 
+  color: var(--text-color); 
+  outline: none; 
+}
+
+.search-section { 
+  padding: 8px 4px 4px; 
+}
+
+.search-section-heading { 
+  font-size: 12px; 
+  font-weight: 600; 
+  letter-spacing: .05em; 
+  color: #8f8f8f; 
+  text-transform: uppercase; 
+  margin: 18px 0 4px; 
+  border-top: 1px solid #ececec; 
+  padding-top: 14px; 
+}
+
+.search-section:first-of-type .search-section-heading { 
+  border-top: none; 
+  padding-top: 0; 
+  margin-top: 4px; 
+}
+
+.search-links { 
+  list-style: none; 
+  margin: 0; 
+  padding: 0; 
+}
+
+.search-links li { 
+  padding: 6px 0; 
+}
+
+.search-links a { 
+  text-decoration: none; 
+  color: var(--text-color); 
+  font-weight: 600; 
+  font-size: 16px; 
+  display: block; 
+}
+
 
 
 
