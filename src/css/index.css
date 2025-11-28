@@ -9,7 +9,7 @@
 
   /* base */
   --app-bg: #242424;
-  --app-bg-secondary: #f5f5f5;
+  --app-bg-secondary: #f8f8f8;
   --app-bg-blur: rgba(0,0,0,0.35);
   --text-color: #161616;
   --text-secondary-color: #8f8f8f;
@@ -23,6 +23,7 @@
   --navbar-padding-desktop: 16px 144px;
   --logo-height-mobile: 28px;
   --logo-height-desktop: 42px;
+  --navbar-height-desktop: 74px; /* 16 top + 42 logo + 16 bottom */
   --icon-size: 24px;
 
   /* sheets */

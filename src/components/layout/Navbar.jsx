@@ -5,10 +5,12 @@ import search_icon from '../../assets/icon/search-2-line.svg'
 import cart_icon from '../../assets/icon/shopping-bag-4-line.svg'
 import menu_icon from '../../assets/icon/menu-3-fill.svg'
 import close_icon from '../../assets/icon/close-fill.svg'
+import ProductSearchMini from '../ui/ProductSearchMini'
 
 function Navbar() {
 	// sheetType: null | 'menu' | 'search'
 	const [sheetType, setSheetType] = useState(null)
+	const [searchQuery, setSearchQuery] = useState('')
 
 	// items de navegacion (desktop)
 	const navLinks = [
@@ -42,11 +44,61 @@ function Navbar() {
 		}
 	}, [sheetType])
 
-	const closeOnBackdrop = () => setSheetType(null)
+	// auto-focus en desktop cuando se abre el panel de busqueda
+	useEffect(() => {
+		if (sheetType === 'search' && typeof window !== 'undefined' && window.innerWidth >= 767) {
+			// esperar al siguiente frame para asegurar que el input exista y este visible
+			const id = window.requestAnimationFrame(() => {
+				const input = document.querySelector('.search-desktop .search-input')
+				if (input && typeof input.focus === 'function') {
+					input.focus()
+				}
+			})
+			return () => window.cancelAnimationFrame(id)
+		}
+	}, [sheetType])
+
+	// cierre generico que decide si usar animacion (desktop search) o cierre inmediato (mobile / otros sheets)
+	const closeOnBackdrop = () => {
+		if (sheetType === 'search' && typeof window !== 'undefined' && window.innerWidth >= 767) {
+			// desktop: animar
+			closeSearchWithAnimation()
+		} else {
+			// mobile o cualquier otro sheet
+			setSheetType(null)
+		}
+	}
+
+	// cierre con animacion para desktop (solo panel de busqueda en >=767px)
+	const closeSearchWithAnimation = () => {
+		// si no esta abierto el search, salir
+		if (sheetType !== 'search') {
+			setSheetType(null)
+			return
+		}
+		// en mobile no animamos, cierre directo
+		if (typeof window !== 'undefined' && window.innerWidth < 767) {
+			setSheetType(null)
+			return
+		}
+		const el = document.querySelector('.search-desktop')
+		if (!el) {
+			setSheetType(null)
+			return
+		}
+		el.classList.add('closing')
+		const onEnd = (evt) => {
+			if (evt.propertyName !== 'transform') return
+			el.classList.remove('closing')
+			setSheetType(null)
+			el.removeEventListener('transitionend', onEnd)
+		}
+		el.addEventListener('transitionend', onEnd)
+	}
 
 	return (
 		<>
-			<nav className="nav-mobile">
+			<nav className={`nav-mobile ${sheetType === 'search' ? 'nav-no-shadow' : ''}`}>
 				<div className="nav-left">
 					<Link to="/" className="nav-logo">
 						<img src={logo} alt="Kohi" />
@@ -100,7 +152,7 @@ function Navbar() {
 						</li>
 					))}
 				</ul>
-				<button className="sheet-close" onClick={() => setSheetType(null)}>
+				<button className="sheet-close" onClick={closeOnBackdrop}>
 					<span>Cerrar</span>
 					<img src={close_icon} alt="Cerrar" />
 				</button>
@@ -122,6 +174,8 @@ function Navbar() {
 							placeholder="buscar en nuestra tienda"
 							type="text"
 							aria-label="Ingresar término de búsqueda"
+							value={searchQuery}
+							onChange={(e) => setSearchQuery(e.target.value)}
 						/>
 					</div>
 				</div>
@@ -145,10 +199,54 @@ function Navbar() {
 						))}
 					</ul>
 				</div>
-				<button className="sheet-close" onClick={() => setSheetType(null)}>
+				<button className="sheet-close" onClick={closeOnBackdrop}>
 					<span>Cerrar</span>
 					<img src={close_icon} alt="Cerrar" />
 				</button>
+			</div>
+
+			{/* desktop sheet search panel */}
+			<div className={`search-desktop-backdrop ${sheetType === 'search' ? 'show' : ''}`} onClick={closeOnBackdrop} />
+			<div className={`search-desktop ${sheetType === 'search' ? 'open' : ''}`} aria-hidden={sheetType !== 'search'}>
+				<div className="search-desktop-inner">
+					<div className="search-desktop-content">
+						<div className="search-desktop-left">
+							<div className="search-section">
+								<div className="search-section-heading">Café</div>
+								<ul className="search-links">
+									{searchCafeLinks.map(({ label, to }) => (
+										<li key={label}>
+											<Link to={to} onClick={() => setSheetType(null)}>{label}</Link>
+										</li>
+									))}
+								</ul>
+							</div>
+							<div className="search-section">
+								<div className="search-section-heading">Accesorios</div>
+								<ul className="search-links">
+									{searchAccesoriosLinks.map(({ label, to }) => (
+										<li key={label}>
+											<Link to={to} onClick={() => setSheetType(null)}>{label}</Link>
+										</li>
+									))}
+								</ul>
+							</div>
+						</div>
+						<div className="search-desktop-right">
+							<h2 className="psm-heading">Buscar</h2>
+							<div className="search-input-wrapper">
+								<input
+									className="search-input"
+									placeholder="buscar en nuestra tienda"
+									type="text"
+									value={searchQuery}
+									onChange={(e) => setSearchQuery(e.target.value)}
+								/>
+							</div>
+							
+						</div>
+					</div>
+				</div>
 			</div>
 		</>
 	)

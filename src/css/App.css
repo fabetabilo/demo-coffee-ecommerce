@@ -2,7 +2,7 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  text-align: initial;
 }
 
 
@@ -26,6 +26,7 @@
   background: var(--navbar-bg);
   box-shadow: var(--navbar-shadow);
 }
+.nav-no-shadow { box-shadow: none !important; }
 
 .nav-left .nav-logo img {
   height: var(--logo-height-mobile);
@@ -220,6 +221,11 @@
   display: block; 
 }
 
+/* en mobile el panel desktop no se muestra */
+@media (max-width: 766px) {
+  .search-desktop, .search-desktop-backdrop { display: none; }
+}
+
 
 
 
@@ -243,7 +249,7 @@
     display: flex; 
     gap: 24px; 
     margin-left: auto; 
-    margin-right: 32px; 
+    margin-right: auto; 
     align-items: center; 
   }
 
@@ -261,4 +267,134 @@
     background: var(--accent-bg); 
     color: var(--accent-text); 
   }
+
+  /* desktop search overlay */
+  .search-desktop-backdrop {
+    position: fixed; 
+    inset: 0; 
+    background: var(--app-bg-blur);
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 200ms ease; 
+    z-index: 49;
+  }
+  
+  .search-desktop-backdrop.show { 
+    opacity: 1; 
+    pointer-events: auto; 
+  }
+
+  .search-desktop {
+    position: fixed; 
+    top: calc(var(--navbar-height-desktop) - 8px); /* leve separacion bajo navbar */
+    left: 0; 
+    right: 0; 
+    z-index: 50;
+    padding-left: var(--navbar-padding-desktop);
+    padding-right: var(--navbar-padding-desktop);
+    opacity: 0; 
+    transform: translateY(-600px);
+    pointer-events: none;
+    transition: transform 300ms ease-out;
+  }
+  .search-desktop.open { 
+    opacity: 1; 
+    transform: translateY(0); 
+    pointer-events: auto; 
+  }
+  .search-desktop.closing { 
+    opacity: 1; 
+    transform: translateY(-600px); 
+    pointer-events: none; 
+  }
+
+  .search-desktop-inner {
+    background: var(--sheet-bg);
+    border-bottom-left-radius: 24px; /* bordes del sheet */
+    border-bottom-right-radius: 24px;
+    box-shadow: var(--sheet-shadow);
+    padding: 18px 20px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 16px;
+    height: 440px; /* altura fija del sheet */
+  }
+
+  .search-desktop-header { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+  }
+
+  .search-desktop-content { 
+    display: grid; 
+    grid-template-columns: 320px 1fr; 
+    gap: 24px; 
+    align-items: start; 
+  }
+
+  .search-desktop-left { 
+    padding-right: 0px;
+    padding-left: 7.7rem; 
+    text-align: left;
+  }
+  .search-desktop-right { 
+    min-height: 240px; 
+    overflow: hidden; 
+    text-align: left;
+    margin-right: 7.7rem; 
+  }
+
+  /* centrar barra y resultados dentro del sheet */
+  .search-desktop-right .search-input-wrapper { 
+    margin-bottom: 14px; 
+    max-width: auto; 
+    margin-left: auto;  
+  }
+
+  .psm-grid { 
+    margin-left: auto; 
+    margin-right: auto; 
+  }
+
+  .psm-heading {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .search-desktop-right .search-input { font-size: var(--font-size-big); }
+
+  .search-desktop-right .psm-heading {
+    margin-top: 8px;
+  }
+  /* separadores bajo encabezados de menu izquierdo */
+  .search-desktop-left .search-section-heading {
+    border: 0; 
+    border-bottom: 1px solid var(--border-lines);
+    padding-bottom: 8px; 
+    margin: 0 0 8px 0; 
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--text-secondary-color);
+    letter-spacing: .05em;
+    font-size: var(--font-size-small);
+  }
+
+  .search-desktop-left .search-links { 
+    list-style: none; 
+    margin: 0;
+    padding-left: 3rem;
+  }
+
+  .search-desktop-left .search-links li { padding: 6px 0; }
+
+  .search-desktop-left .search-links a { 
+    display: block; 
+    text-decoration: none; 
+    color: var(--text-color); 
+    font-weight: 600; 
+    font-size: var(--font-size-big); 
+    line-height: 1.25; 
+  }
+
 }
