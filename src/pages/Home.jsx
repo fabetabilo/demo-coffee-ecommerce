@@ -1,10 +1,18 @@
 import React from 'react'
+import Banner from '../components/ui/Banner'
 
 function Home() {
 	return (
-		<main style={{ padding: '96px' }}>
-			<h1 style={{ margin: 0, fontSize: '24px' }}>Home</h1>
-			<p style={{ color: '#555' }}>Contenido inicial de mi pagina.</p>
+		<main style={{ padding: '70px' }}>
+			<Banner 
+				type="video"
+				src="/vid/bean1.mp4" 
+				ctaText="Sorpréndete con nuestros diferentes orígenes. Sólo hasta acabar stock. Este es un call-to-action."
+				ctaButtonText="VER MÁS"  
+				onCtaClick={() => console.log('se hizo click')}
+				title=" "
+				darkOverlay
+			/>
 		</main>
 	)
 }

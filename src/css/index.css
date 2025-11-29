@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+SemiExpanded:wght@300;600;800&display=swap');
+
 :root {
   /* tipografía */
   --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --title-font: 'Zalando Sans SemiExpanded', sans-serif;
   --font-size-big: 18px;
   --font-size-medium: 16px;
   --font-size-small: 14px;
