@@ -226,6 +226,217 @@
   .search-desktop, .search-desktop-backdrop { display: none; }
 }
 
+.footer {
+  margin-top: 24px;
+  color: var(--text-color);
+}
+
+.footer-section-news {
+  background: #000; /* distinto color */
+  color: #fff;
+  padding: 56px 16px 56px 16px;
+}
+
+.news-inner { 
+  max-width: 640px; 
+  margin: 0 auto; }
+
+.news-title {
+  font-family: var(--title-font);
+  font-weight: 600;
+  font-size: 32px;
+  margin: 0 0 28px 0;
+}
+
+.news-form { display: block; }
+.news-input-row { display: flex; align-items: center; gap: 12px; }
+
+/* envoltorio del input con etiqueta flotante */
+.news-input-wrap {
+  position: relative;
+  flex: 1;
+}
+
+.news-input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  color: #fff; /* texto del correo (fuente tipografia normal) */
+  font-family: var(--font-family); /* tipografia normal del sitio */
+  font-size: 16px;
+  padding: 10px 0 8px 0;
+  outline: none;
+}
+
+.news-label {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-family: var(--title-font); /* estilo de la pagina para el placeholder */
+  font-weight: 600;
+  letter-spacing: .08em;
+  font-size: 12px;
+  pointer-events: none;
+  transition: all 160ms ease;
+}
+
+/* subrayado estilizado */
+.news-underline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(255,255,255,.5);
+  transform-origin: left;
+  transform: scaleX(1);
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+/* estados: enfoque y contenido (placeholder-shown hack) */
+.news-input:focus ~ .news-underline { 
+  background: #fff; 
+  transform: scaleX(1.02); 
+}
+
+.news-input:focus ~ .news-label { 
+  top: 0%; 
+  transform: translateY(-100%); 
+  opacity: .9; 
+}
+
+.news-input:not(:placeholder-shown) ~ .news-label { 
+  top: 0%; 
+  transform: translateY(-100%); 
+  opacity: .9; 
+}
+
+/* boton submit flecha */
+.news-submit {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid #fff;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease; /* animacion suave */
+}
+.news-submit img { 
+  width: 18px; 
+  height: 18px; 
+  filter: invert(1); 
+  transition: filter 160ms ease; /* suaviza el cambio del icono */
+}
+
+.news-submit:hover { background: #fff; }
+.news-submit:hover img { filter: invert(0); }
+
+.news-caption {
+  margin: 10px 0 40px 0;
+  color: rgba(255,255,255,.8);
+  font-size: 12px;
+  font-family: var(--font-family);
+}
+
+.footer-logo img {
+  height: 78px;
+  width: auto;
+  display: block;
+}
+
+.footer-inner {
+  background: var(--sheet-bg);
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  box-shadow: var(--sheet-shadow);
+  padding: 16px;
+  overflow: hidden; /* asegura el redondeado con contenido continuo */
+}
+
+.footer-section { 
+  margin: 0;
+}
+
+/* divisores continuos entre secciones */
+.footer-section + .footer-section {
+  border-top: 1px solid var(--border-lines);
+}
+
+/* para animar un poco los desplegables del footer */
+.footer-collapse {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: max-height 240ms ease, opacity 240ms ease, transform 240ms ease;
+}
+.footer-collapse.open {
+  max-height: 380px; /* segun el contenido, esto puede variar mas tarde */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.footer-section-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: 0;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: var(--font-size-big);
+  padding: 16px 4px;
+  cursor: pointer;
+}
+
+.footer-chevron { 
+  display: inline-block; 
+  transition: transform 160ms ease; 
+  
+}
+.footer-chevron img { 
+  width: 18px; 
+  height: 18px; 
+  display: block; 
+  filter: invert(var(--invert-icons, 0));
+}
+.footer-chevron.open { transform: rotate(180deg); } /* animacion de rotacion */
+
+.footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0 4px 16px 4px; /* espacio bajo el header, continuo */
+}
+.footer-links li { padding: 10px 0; }
+.footer-links a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: var(--font-size-big);
+}
+
+.footer-claim {
+  margin: 24px 8px 56px 8px;
+  font-family: var(--title-font);
+  font-weight: 800;
+  font-size: 24px;
+  text-align: center;
+}
+
+.footer-copy {
+  margin-top: 16px;
+  padding: 16px 8px 44px 8px;
+  color: var(--text-secondary-color);
+  text-align: center;
+  font-size: var(--font-size-small);
+}
 
 
 

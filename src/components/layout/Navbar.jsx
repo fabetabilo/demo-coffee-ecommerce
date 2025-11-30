@@ -5,7 +5,6 @@ import search_icon from '../../assets/icon/search-2-line.svg'
 import cart_icon from '../../assets/icon/shopping-bag-4-line.svg'
 import menu_icon from '../../assets/icon/menu-3-fill.svg'
 import close_icon from '../../assets/icon/close-fill.svg'
-import ProductSearchMini from '../ui/ProductSearchMini'
 
 function Navbar() {
 	// sheetType: null | 'menu' | 'search'
