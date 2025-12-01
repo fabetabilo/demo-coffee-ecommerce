@@ -14,6 +14,7 @@ function Footer() {
     const toggle = (key) => setOpen((prev) => ({ ...prev, [key]: !prev[key] }))
 
     return (
+        <>
         <footer className="footer footer-mobile">
             <div className="footer-section-news">
                 <div className="news-inner">
@@ -95,11 +96,10 @@ function Footer() {
                     </div>
                 </div>
                 <div className="footer-claim">WE CARE ABOUT COFFEE</div>
-            </div>
-
-            <div className="footer-copy">© 2025 Demo. By FT</div>
-
+            </div>   
         </footer>
+        <div className="footer-copy">© 2025 Demo. By FT</div>
+        </>
     )
 }
 

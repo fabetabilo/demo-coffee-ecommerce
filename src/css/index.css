@@ -11,7 +11,7 @@
   --line-height: 1;
 
   /* base */
-  --app-bg: #242424;
+  --app-bg: #141414;
   --app-bg-secondary: #f8f8f8;
   --app-bg-blur: rgba(0,0,0,0.35);
   --text-color: #161616;
@@ -40,6 +40,7 @@
   --accent-text: #fff;
   --accent-fade: 180ms ease;
   --border-lines: #ececec;
+  --border-lines-dark: #272727;
 }
 
 body {
