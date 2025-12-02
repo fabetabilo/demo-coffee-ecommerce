@@ -1,4 +1,5 @@
 import React from 'react'
+import bongoCat from '../assets/img/gif_o.gif'
 import Banner from '../components/ui/Banner'
 
 function Home() {
@@ -7,10 +8,11 @@ function Home() {
 			<Banner 
 				type="video"
 				src="/vid/bean1.mp4" 
-				ctaText="Sorpréndete con nuestros diferentes orígenes. Sólo hasta acabar stock. Este es un call-to-action."
+				ctaGraphicSrc={bongoCat}
+				ctaText="Siempre hay alguien obsesionado con el Café. Esos somos nosotros. Estamos para ayudarte a transformar tu café y tu casa en la cafetería que soñaste."
 				ctaButtonText="VER MÁS"  
 				onCtaClick={() => console.log('se hizo click')}
-				title=" "
+				sectionTitle=" "
 				darkOverlay
 			/>
 		</main>

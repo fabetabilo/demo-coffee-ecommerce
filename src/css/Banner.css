@@ -1,15 +1,21 @@
 :root {
-	--banner-height-home-mobile: 400px;
+	--banner-height-home-mobile: 480px;
 	--banner-height-home-desktop: 620px;
 	
 	--banner-overlay-bg: rgba(0, 0, 0, 0); /* lienzo transparente por defecto */
 	--banner-overlay-darkness: rgba(0, 0, 0, .28); /* oscurecer media para cuando sea necesario */
 	--banner-title-size-mobile: 38px;
 	--banner-title-size-desktop: 64px;
+	--banner-cta-title-size-mobile: 28px;
+	--banner-cta-title-size-desktop: 48px;
 	--banner-cta-text-size-mobile: 16px;
 	--banner-cta-text-size-desktop: 20px;
 	--banner-btn-radius: 999px;
 	--banner-btn-padding: 12px 28px;
+
+	--banner-text-light: #fff;
+	--banner-accent-color: #ffffff;
+
 }
 
 
@@ -78,12 +84,12 @@
 	justify-content: flex-end;
 	gap: 28px; /* espacio entre CTA y title */
 	background: var(--banner-overlay-bg);
-	color: #fff;
+	color: var(--banner-text-light);
 	z-index: 2; /* encima del oscurecedor */
 	pointer-events: none; /* contenedor no me capta eventos */
 }
 
-/* titulo banner opcional esquina inferior izquierda */
+/* titulo de seccion banner opcional esquina inferior izquierda */
 .banner-title {
 	align-self: flex-start;
 	padding: 0 0 38px 18px; /* contenedor: el padding aplica a title y description */
@@ -91,7 +97,7 @@
 }
 
 .banner-title-text {
-	font-weight: 600;
+	font-weight: var(--font-weight-title);
 	font-size: var(--banner-title-size-mobile);
 	line-height: 1.05;
 	font-family: var(--title-font);
@@ -117,6 +123,34 @@
 	pointer-events: auto;
 }
 
+/* variante: para left-side alinea cta a la izquierda del banner  */
+.banner.left-side .banner-cta {
+	align-items: flex-start;
+	text-align: left;
+	align-self: flex-start;
+	padding-left: var(--app-padding-left-mobile);
+}
+.banner.left-side .banner-cta-title,
+.banner.left-side .banner-cta-text { text-align: left; }
+.banner.left-side .banner-btn { align-self: flex-start; }
+
+/* recurso grafico opcional sobre el ctaTitle (gif o imagen) */
+.banner-cta-graphic {
+	max-width: 320px;
+	display: block;
+	image-rendering: auto;
+}
+
+.banner-cta-title {
+	font-family: var(--title-font);
+	font-size: var(--banner-cta-title-size-mobile);
+	font-weight: var(--font-weight-title);
+	line-height: 1.05;
+	text-align: center;
+	max-width: 680px;
+	padding: 12px 0 0 0; /* padding superior sobre el CTA */
+}
+
 .banner-cta-text {
 	font-size: var(--banner-cta-text-size-mobile);
 	max-width: 380px;
@@ -126,8 +160,8 @@
 
 .banner-btn {
 	appearance: none;
-	border: 1px solid #fff;
-	color: #fff;
+	border: 1px solid var(--banner-accent-color);
+	color: var(--banner-text-light);
 	background: transparent;
 	backdrop-filter: blur(4px);
 	border-radius: var(--banner-btn-radius);
@@ -141,9 +175,9 @@
 }
 
 .banner-btn:hover {
-	background: #fff;
+	background: var(--banner-accent-color);
 	color: #000; /* este es el color del texto */
-	border-color: #fff; /* mantener el borde blanco en hover */
+	border-color: var(--banner-accent-color);
 }
 
 
@@ -179,15 +213,34 @@
 		gap: 18px;
 	}
 
+	.banner.left-side .banner-cta {
+		padding-left: var(--app-padding-left-desktop);
+	}
+
+	.banner.left-side .banner-cta-text {
+		max-width: 780px;
+	}
+
+	.banner-cta-graphic {
+		max-width: 520px;
+	}
+
+	.banner-cta-title {
+		font-size: var(--banner-cta-title-size-desktop);
+		padding-top: 18px;
+		max-width: 1080px;
+	}
+
 	.banner-cta-text {
 		font-size: var(--banner-cta-text-size-desktop);
-		max-width: 700px;
+		max-width: 980px;
+		padding-top: 12px;
 		padding-bottom: 24px;
 		line-height: 32px;
 	}
 
 	.banner-btn {
-		border: 2px solid;
+		border: 2px solid var(--banner-accent-color);
 	}
 
 	.banner-btn-text {

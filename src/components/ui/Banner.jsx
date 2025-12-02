@@ -3,16 +3,18 @@
 	import arrowRight from '../../assets/icon/arrow-right-line.svg'
 
 /**
-* Banner reutilizable con overlay
+* Banner reutilizable con overlay. Por defecto, alinea el contenido cta al centro.
 * Props:
 * - src: string (ruta a video o imagen)
 * - type: 'video' | 'image' (por defecto: 'image')
 * - alt: string (para image)
 * - poster: string (poster opcional para video)
-* - className: string (clases extra)
-* - title: string opcional (titulo grande esquina inferior izquierda), para no colocar nada usar un string vacio " " puede funcionar mejor
+* - className: string (clases extra). "left-side" alinea contenido del cta a la izquierda del banner
+* - sectionTitle: string opcional (titulo de seccion grande esquina inferior izquierda), para no colocar nada usar un string vacio " " puede funcionar mejor
 * - description: string opcional para la descripcion de alguna seccion, para no colocar descripcion, solo no incluirlo
 * - ctaText: string opcional (mensaje centrado)
+* - ctaTitle: string opcional (titulo encima del CTA centrado)
+* - ctaGraphicSrc: string opcional (ruta a GIF o imagen sobre ctaTitle)
 * - ctaButtonText: string opcional (texto del boton)
 * - onCtaClick: function opcional (callback del boton)
 * - darkOverlay: boolean (oscurecer media bajo overlay)
@@ -23,9 +25,11 @@ function Banner({
 	alt = '',
 	poster,
 	className = '',
-	title,
+	sectionTitle,
 	description,
 	ctaText,
+	ctaTitle,
+	ctaGraphicSrc,
 	ctaButtonText,
 	onCtaClick,
 	darkOverlay = false,
@@ -47,10 +51,16 @@ function Banner({
 					<img className="banner-el" src={src} alt={alt} />
 					)}
 					{/* Overlay contenido */}
-					{(title || ctaText || ctaButtonText) && (
+					{(sectionTitle || ctaText || ctaButtonText || ctaTitle) && (
 						<div className="banner-overlay">
-							{(ctaText || ctaButtonText) && (
+							{(ctaTitle || ctaText || ctaButtonText || ctaGraphicSrc) && (
 								<div className="banner-cta"> 
+									{ctaGraphicSrc && (
+										<img className="banner-cta-graphic" src={ctaGraphicSrc} alt="" aria-hidden="true" />
+									)}
+									{ctaTitle && (
+									  <div className="banner-cta-title">{ctaTitle}</div>
+									)}
 									{ctaText && 
 									<div className="banner-cta-text">
 										{ctaText}
@@ -63,9 +73,9 @@ function Banner({
 									)}
 								</div>
 							)}
-							{(title || description) && (
+							{(sectionTitle || description) && (
 								<div className="banner-title">
-									{title && <div className="banner-title-text">{title}</div>}
+									{sectionTitle && <div className="banner-title-text">{sectionTitle}</div>}
 									{description && <div className="banner-description">{description}</div>}
 								</div>
 							)}
