@@ -583,6 +583,37 @@
     line-height: var(--line-height); 
   }
 
+  /* efecto sweep bajo linea  */
+  .search-desktop-left .search-links a,
+  .footer-links a {
+    position: relative;
+    display: inline-block; /* necesario para posicionar el subrayado */
+    text-decoration: none;
+  }
+
+  .search-desktop-left .search-links a::after,
+  .footer-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 1px;
+    width: 100%;
+    background: currentColor; /* respeta los colores */
+    transform: scaleX(0);
+    transform-origin: right; /* efecto desaparecer de izquierda a derecha */
+    transition: transform var(--accent-fade);
+    pointer-events: none;
+  }
+
+  .search-desktop-left .search-links a:hover::after,
+  .search-desktop-left .search-links a:focus-visible::after,
+  .footer-links a:hover::after,
+  .footer-links a:focus-visible::after {
+    transform: scaleX(1); /* efecto izquierda a derecha */
+    transform-origin: left;
+  }
+
   .footer {
     width: 100vw;
     position: relative;
