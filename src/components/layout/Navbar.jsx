@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../../assets/img/kohi_bl.png'
+import logoBlack from '../../assets/img/kohi_bl.png'
+import logoWhite from '../../assets/img/kohi_wt.png'
 import search_icon from '../../assets/icon/search-2-line.svg'
 import cart_icon from '../../assets/icon/shopping-bag-4-line.svg'
 import menu_icon from '../../assets/icon/menu-3-fill.svg'
@@ -10,6 +11,11 @@ function Navbar() {
 	// sheetType: null | 'menu' | 'search'
 	const [sheetType, setSheetType] = useState(null)
 	const [searchQuery, setSearchQuery] = useState('')
+	// estado: en el tope superior para navbar transparente
+	const [atTop, setAtTop] = useState(true)
+	const [isDesktop, setIsDesktop] = useState(
+		typeof window !== 'undefined' ? window.innerWidth >= 767 : false
+	)
 
 	// items de navegacion (desktop)
 	const navLinks = [
@@ -42,6 +48,29 @@ function Navbar() {
 			document.body.style.overflow = ''
 		}
 	}, [sheetType])
+
+	// detecta el scroll para alternar navbar transparente/solida (mobile y desktop)
+	useEffect(() => {
+		const onScroll = () => {
+			if (typeof window === 'undefined') return
+			const top = window.scrollY <= 2
+			setAtTop(top)
+		}
+		onScroll()
+		window.addEventListener('scroll', onScroll, { passive: true })
+		return () => window.removeEventListener('scroll', onScroll)
+	}, [])
+
+	// detectar cambios de tamano para saber si es desktop o mobile
+	useEffect(() => {
+		const onResize = () => {
+			if (typeof window === 'undefined') return
+			setIsDesktop(window.innerWidth >= 767)
+		}
+		onResize()
+		window.addEventListener('resize', onResize, { passive: true })
+		return () => window.removeEventListener('resize', onResize)
+	}, [])
 
 	// auto-focus en desktop cuando se abre el panel de busqueda
 	useEffect(() => {
@@ -97,11 +126,29 @@ function Navbar() {
 
 	return (
 		<>
-			<nav className={`nav-mobile ${sheetType === 'search' ? 'nav-no-shadow' : ''}`}>
+			<nav className={`nav-mobile ${sheetType === 'search' ? 'nav-no-shadow' : ''} ${atTop && (!isDesktop || sheetType !== 'search') ? 'nav-transparent' : ''}`}>
+				{(() => {
+					// mismo criterio para mantener sincronizado el intercambio de logo
+					return null
+				})()}
 				<div className="nav-left">
-					<Link to="/" className="nav-logo">
-						<img src={logo} alt="Kohi" />
-					</Link>
+					{(() => {
+						const isTransparent = atTop && (!isDesktop || sheetType !== 'search')
+						return (
+							<Link to="/" className="nav-logo">
+								<img
+									className={`logo logo-black ${isTransparent ? 'hide' : 'show'}`}
+									src={logoBlack}
+									alt="Kohi"
+								/>
+								<img
+									className={`logo logo-white ${isTransparent ? 'show' : 'hide'}`}
+									src={logoWhite}
+									alt="Kohi"
+								/>
+							</Link>
+						)
+					})()}
 				</div>
 
 				{/* items desktop/tablet navbar */}

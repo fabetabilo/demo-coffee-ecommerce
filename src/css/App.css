@@ -16,14 +16,39 @@
   box-sizing: border-box;
   background: var(--navbar-bg);
   box-shadow: var(--navbar-shadow);
+  transition: background 300ms ease, background-color 300ms ease, color 300ms ease, box-shadow 300ms ease;
 }
 .nav-no-shadow { box-shadow: none !important; }
 
-.nav-left .nav-logo img {
+/* estado transparente al estar en el tope superior) */
+.nav-mobile.nav-transparent {
+  background: transparent;
+  box-shadow: none;
+}
+.nav-mobile.nav-transparent .icon-btn img { filter: invert(1); }
+
+/* cuando no es transparente: vuelve al solido */
+.nav-mobile:not(.nav-transparent) {
+  background: var(--navbar-bg);
+  box-shadow: var(--navbar-shadow);
+}
+
+.nav-left .nav-logo {
+  position: relative;
+  display: block;
   height: var(--logo-height-mobile);
+}
+.nav-left .nav-logo img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
   width: auto;
   display: block;
+  transition: opacity 300ms ease;
 }
+.nav-left .nav-logo .logo.show { opacity: 1; }
+.nav-left .nav-logo .logo.hide { opacity: 0; }
 
 /* Items escondidos en mobile */
 .nav-items {
@@ -427,10 +452,23 @@
   
   .nav-mobile { 
     padding: var(--navbar-padding-desktop); 
+    background: var(--navbar-bg);
+  }
+
+  /* estado transparente en tope superior */
+  .nav-mobile.nav-transparent {
+    background: transparent;
+    box-shadow: none;
   }
 
   .nav-left .nav-logo img { 
+    position: absolute;
+    top: 0;
+    left: 0;
     height: var(--logo-height-desktop); 
+  }
+  .nav-left .nav-logo { 
+    height: var(--logo-height-desktop);
   }
 
   .nav-items { 
@@ -458,6 +496,26 @@
     background: var(--accent-bg); 
     color: var(--accent-text); 
   }
+
+  /* cuando navbar es transparente: links blancos y hover igual negro */
+  .nav-mobile.nav-transparent .nav-items a {
+    color: var(--text-primary-color-light); 
+  }
+
+  .nav-mobile.nav-transparent .icon-btn img { 
+    filter: invert(1); 
+  }
+
+  /* al abrir busqueda en desktop, el navbar solido e iconos negros */
+  .nav-mobile.nav-no-shadow { 
+    background: var(--navbar-bg); 
+  }
+
+  .nav-mobile.nav-no-shadow .nav-items a { 
+    color: var(--text-link-color); 
+  }
+  
+  .nav-mobile.nav-no-shadow .icon-btn img { filter: invert(0); }
 
   /* desktop search overlay */
   .search-desktop-backdrop {
