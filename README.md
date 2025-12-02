@@ -1,16 +1,63 @@
-# React + Vite
+<img src="public/preview/preview-1.png" alt="vistaprevia" width="100%" />
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Ecommerce Coffee Demo
 
-Currently, two official plugins are available:
+Una plataforma web ecommerce para vender café, accesorios, cafeteras y productos relacionados a una tienda cafetería o tostador independiente.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Objetivo
 
-## React Compiler
+Demostrar una base funcional y reusable de una tienda online centrada en café, con enfoque mobile-first y componentes UI reutilizables (Navbar, Banner, Footer), lista para evolucionar a un proyecto real.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack Tecnológico
 
-## Expanding the ESLint configuration
+- React (Vite) para frontend
+- JavaScript + CSS puro (sin framework CSS)
+- React Router para navegación
+- Opcionalmente integrable con backend Java/Spring Boot en proyectos reales (futuro)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Requisitos Previos
+
+- Node.js 18+ (recomendado LTS). Verifica versión:
+
+```powershell
+node -v
+npm -v
+```
+
+Descarga e instala desde: https://nodejs.org/
+
+## Instalación y Ejecución
+
+1) Instalar dependencias del proyecto:
+
+```powershell
+npm install
+```
+
+2) Instalar React Router (si no está ya incluido):
+
+```powershell
+npm install react-router-dom
+```
+
+3) Correr el servidor de desarrollo:
+
+```powershell
+npm run dev
+```
+
+Vite te mostrará la URL local (por defecto `http://localhost:5173`).
+
+## Estructura del Proyecto (resumen)
+
+- `src/assets/`: Archivos personalizados necesarios para la plataforma (Iconos, videos, imagenes, etc).
+- `src/components/`: Componentes de la app (Navbar, Footer, Banner, etc).
+- `src/css/`: Hojas de diseño de la plataforma.
+- `src/pages/`: Páginas de la plataforma (Home, Tienda, etc.).
+- `public/preview/preview-1.png`: Imagen de vista previa usada arriba.
+
+## Notas
+
+- El proyecto es una demo; la integración con backend (por ejemplo Java/Spring Boot) para catálogo, recomendaciones o checkout se puede añadir más adelante.
+- Mantiene estilos mobile-first con media queries para desktop.
+
