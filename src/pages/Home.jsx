@@ -3,7 +3,7 @@ import Banner from '../components/ui/Banner'
 
 function Home() {
 	return (
-		<main style={{ padding: '70px' }}>
+		<main>
 			<Banner 
 				type="video"
 				src="/vid/bean1.mp4" 

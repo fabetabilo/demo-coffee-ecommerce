@@ -1,6 +1,6 @@
 :root {
 	--banner-height-home-mobile: 400px;
-	--banner-height-home-desktop: 520px;
+	--banner-height-home-desktop: 620px;
 	
 	--banner-overlay-bg: rgba(0, 0, 0, 0); /* lienzo transparente por defecto */
 	--banner-overlay-darkness: rgba(0, 0, 0, .28); /* oscurecer media para cuando sea necesario */

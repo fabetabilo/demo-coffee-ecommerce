@@ -49,7 +49,7 @@ function Footer() {
             <div className="footer-inner">
                 <div className="footer-section">
                     <button className="footer-section-header" type="button" onClick={() => toggle('store')}>
-                        <span>Tienda</span>
+                        <span>TIENDA</span>
                         <span className={`footer-chevron ${open.store ? 'open' : ''}`} aria-hidden>
                             <img src={arrowDown} alt="" aria-hidden="true" />
                         </span>
@@ -64,7 +64,7 @@ function Footer() {
                 </div>
                 <div className="footer-section">
                     <button className="footer-section-header" type="button" onClick={() => toggle('productos')}>
-                        <span>Productos</span>
+                        <span>PRODUCTOS</span>
                         <span className={`footer-chevron ${open.productos ? 'open' : ''}`} aria-hidden>
                             <img src={arrowDown} alt="" aria-hidden="true" />
                         </span>
@@ -80,7 +80,7 @@ function Footer() {
                 </div>
                 <div className="footer-section">
                     <button className="footer-section-header" type="button" onClick={() => toggle('informacion')}>
-                        <span>Información</span>
+                        <span>INFORMACIÓN</span>
                         <span className={`footer-chevron ${open.informacion ? 'open' : ''}`} aria-hidden>
                             <img src={arrowDown} alt="" aria-hidden="true" />
                         </span>
