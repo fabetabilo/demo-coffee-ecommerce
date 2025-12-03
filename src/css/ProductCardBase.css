@@ -1,0 +1,93 @@
+/* ProductCardBase: estilo base para una card reutilizable */
+:root {
+    --card-bg-primary: #fff;
+    --card-bg-secondary: #f8f8f8;
+
+	--card-border-radius-mobile: 16px;
+	--card-border-radius-desktop: 24px;
+
+}
+
+
+
+/* mobile first */
+
+.pcb-card {
+    max-width: 240px;
+	max-height: 390px;
+	background: #fff;
+	border-radius: var(--card-border-radius-mobile);
+	overflow: hidden; /* oculta las esquinas superiores bajo la imagen blanca */
+	display: flex;
+	flex-direction: column;
+}
+
+.pcb-media {
+	width: 100%;
+	background: #fff; /* asegura continuidad con la imagen del producto */
+}
+
+.pcb-media img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.pcb-body {
+	background: var(--card-bg-secondary);
+	padding: 16px;
+	min-height: 110px;
+}
+
+.pcb-meta {
+	font-family: var(--title-font);
+	font-size: var(--font-size-smaller);
+	color: var(--text-secondary-color);
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	margin-bottom: 12px;
+}
+
+.pcb-title {
+	font-family: var(--title-font);
+	font-size: var(--font-size-big);
+	font-weight: 400;
+	color: var(--text-primary-color);
+	margin: 0 0 12px 0;
+}
+
+.pcb-bottom {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.pcb-price {
+    font-family: var(--title-font);
+	font-size: var(--font-size-medium);
+    font-weight: 200;
+	color: var(--text-primary-color);
+    padding-bottom: 24px;
+}
+
+
+
+
+
+
+/* desktop/tablet */
+
+@media (min-width: 767px) {
+
+    .pcb-card {
+        max-width: 320px;
+		max-height: 700px;
+		border-radius: var(--card-border-radius-desktop);
+    }
+
+    .pcb-body {
+        padding: 36px;
+		min-height: 110px;
+    }
+
+}

@@ -1,0 +1,70 @@
+/* hoja de estilo para elementos genericos a traves de diferentes paginas, secciones
+* - titulos
+* - canvas, lienzos
+* - etc
+*/
+
+:root {
+    --home-bg-primary: #fff;
+}
+
+
+
+/*  mobile first    */
+.main-container {
+    background: var(--home-bg-primary);
+    border-top-left-radius: var(--app-border-radius);
+    border-top-right-radius: var(--app-border-radius);
+    position: relative;            /* para controlar el stacking */
+    z-index: 2;                    /* queda por encima */
+    margin-top: calc(-1 * var(--app-border-radius)); /* solapa sobre el componente superior */
+    padding-left: var(--app-padding-left-mobile);
+    padding-right: var(--app-padding-right-mobile);
+    padding-top: 28px;
+    padding-bottom: 40px;
+}
+
+.page-section {
+    margin-bottom: 32px;
+}
+
+.page-heading {
+    text-align: center; /*  texto alineado al centro */
+    font-family: var(--title-font);
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0 0 8px 0;
+}
+
+.page-heading-grip {
+    width: 48px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--text-primary-color);
+    margin: 0px auto 12px auto;  /* centrado */
+}
+
+
+
+
+
+
+
+/*   desktop/tablet    */
+
+@media (min-width: 767px) {
+    .main-container {
+        padding-left: var(--app-padding-left-desktop);
+        padding-right: var(--app-padding-right-desktop);
+        padding-top: 44px;
+        padding-bottom: 60px;
+    }
+
+    .page-heading {
+        font-size: 48px;
+    }
+
+    .page-heading-grip {
+        height: 5px;
+    }
+}

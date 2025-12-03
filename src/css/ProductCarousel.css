@@ -1,0 +1,78 @@
+
+
+
+
+
+
+/* mobile-first */
+
+.pcarousel {
+	background: var(--app-bg-primary);
+	border-radius: 24px;
+}
+
+.pcarousel-track {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: calc((100% - 12px) / 2);
+	gap: 12px;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch;
+}
+
+.pcarousel-track::-webkit-scrollbar { display: none; }
+
+.pcarousel-slide {
+	scroll-snap-align: start;
+}
+
+.pcarousel-dots {
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	margin-top: 12px;
+}
+
+.pcarousel-dot {
+	width: 4px;
+	height: 8px;
+	border-radius: 999px;
+	border: 0;
+	background: rgba(0,0,0,.18);
+	cursor: pointer;
+}
+
+.pcarousel-dot.active {
+	background: rgba(0,0,0,.6);
+}
+
+
+
+
+
+
+
+/*	 desktop/tablet		*/
+/* hasta 5 por fila */
+@media (min-width: 767px) {
+	.pcarousel {
+		border-radius: 24px;
+		padding: 20px;
+	}
+
+	/* una sola fila, hasta 5 columnas visibles; scroll horizontal si hay más */
+	.pcarousel-track {
+		display: grid;
+		grid-auto-flow: column;
+		grid-auto-columns: calc((100% - (4 * 16px)) / 5);
+		gap: 16px;
+		justify-content: center; /* centrar cuando hay menos de 5 ítems */
+		overflow-x: auto;
+		scroll-snap-type: x proximity;
+	}
+
+	.pcarousel-dots { display: none; }
+
+}
+

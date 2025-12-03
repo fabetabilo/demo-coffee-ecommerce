@@ -1,6 +1,9 @@
 import React from 'react'
 import bongoCat from '../assets/img/gif_o.gif'
 import Banner from '../components/ui/Banner'
+import ProductCarousel from '../components/ui/ProductCarousel'
+import { demoproducts } from '../data/demo-products'
+import '../css/page.css'
 
 function Home() {
 	return (
@@ -15,6 +18,14 @@ function Home() {
 				sectionTitle=" "
 				darkOverlay
 			/>
+			<div className="main-container">
+				<section className="page-section">
+					<h2 className="page-heading">Los Favoritos</h2>
+					<div className="page-heading-grip" />
+					<ProductCarousel items={demoproducts} />
+				</section>
+			</div>
+
 		</main>
 	)
 }
