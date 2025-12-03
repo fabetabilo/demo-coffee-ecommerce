@@ -517,6 +517,12 @@
   
   .nav-mobile.nav-no-shadow .icon-btn img { filter: invert(0); }
 
+  /* al abrir search-desktop: hover de items */
+  .nav-mobile.nav-no-shadow .nav-items a:hover,
+  .nav-mobile.nav-no-shadow .nav-items a:focus-visible {
+    color: var(--text-primary-color-light);
+  }
+
   /* desktop search overlay */
   .search-desktop-backdrop {
     position: fixed; 
