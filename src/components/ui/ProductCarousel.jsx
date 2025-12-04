@@ -52,8 +52,10 @@ export default function ProductCarousel({ items = [] }) {
 						<ProductCardBase
 							image={p.imagen}
 							title={p.nombre}
+							category={p.categoria}
 							price={p.precio}
-							metaLabel={p.categoria === 'cafe' ? p.origen : (p.marca || '')}
+							origin={p.origen}
+							brand={p.marca}
 						/>
 					</div>
 				))}

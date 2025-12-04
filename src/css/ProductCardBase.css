@@ -6,6 +6,9 @@
 	--card-border-radius-mobile: 16px;
 	--card-border-radius-desktop: 24px;
 
+	--btn-add-to-cart: #000;
+	--btn-add-to-cart-hover: #fff;
+	
 }
 
 
@@ -25,6 +28,7 @@
 .pcb-media {
 	width: 100%;
 	background: #fff; /* asegura continuidad con la imagen del producto */
+	position: relative; /* permite posicionar el boton "dentro" del media */
 }
 
 .pcb-media img {
@@ -70,6 +74,42 @@
     padding-bottom: 24px;
 }
 
+/* btn agregar al carrito button  */
+.pcb-add-btn {
+	position: absolute;
+	right: 12px;
+	bottom: 12px;
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: var(--btn-add-to-cart);
+	border: 2px solid var(--btn-add-to-cart);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: background 180ms ease, border-color 180ms ease;
+}
+
+.pcb-add-btn img {
+	width: 22px;
+	height: 22px;
+	filter: invert(1); /* icono blanco sobre fondo negro */
+	transition: filter 180ms ease;
+}
+
+.pcb-add-btn:active {
+	background: var(--btn-add-to-cart-hover); /* efecto al hacer click */
+	border-color: #000;
+}
+
+.pcb-add-btn:active img {
+	filter: none; /* icono negro sobre fondo */
+}
+
+.pcb-add-btn--desktop { display: none; }
+
+
 
 
 
@@ -79,15 +119,61 @@
 
 @media (min-width: 767px) {
 
-    .pcb-card {
-        max-width: 320px;
+	.pcb-card {
+		max-width: 320px;
 		max-height: 700px;
 		border-radius: var(--card-border-radius-desktop);
-    }
+	}
 
-    .pcb-body {
-        padding: 36px;
+	.pcb-body {
+		padding: 36px;
 		min-height: 110px;
-    }
+	}
 
+	.pcb-add-btn { display: none; }
+
+	/* boton agregar aparece al hover de la card*/
+	.pcb-add-btn--desktop {
+		display: inline-flex;
+		position: absolute;
+		left: 50%;
+		bottom: 12px;
+		transform: translateX(-50%) translateY(10px);
+		opacity: 0;
+		pointer-events: none;
+		padding: 12px 20px;
+		box-sizing: border-box;
+		max-width: calc(100% - 48px);
+		white-space: nowrap; /* mantiene el texto en 1 linea */
+		overflow: hidden;
+		text-overflow: ellipsis;
+		border-radius: 999px;
+		background: var(--btn-add-to-cart);
+		color: #fff;
+		border: 2px solid var(--btn-add-to-cart);
+		font-family: var(--title-font);
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 1;
+		cursor: pointer;
+		transition: opacity 220ms ease, transform 220ms ease,
+					background 180ms ease, color 180ms ease, 
+					border-color 180ms ease;
+	}
+
+	/* slide desde abajo + fade animacion */
+	.pcb-card:hover .pcb-add-btn--desktop,
+	.pcb-card:focus-within .pcb-add-btn--desktop {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+		pointer-events: auto;
+	}
+
+	.pcb-add-btn--desktop:hover,
+	.pcb-add-btn--desktop:active,
+	.pcb-add-btn--desktop:focus-visible {
+		background: var(--btn-add-to-cart-hover);
+		color: #000;
+		border-color: var(--btn-add-to-cart);
+	}
 }
