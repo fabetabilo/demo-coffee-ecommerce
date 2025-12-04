@@ -1,6 +1,8 @@
 import React, { useMemo, useRef, useEffect, useState } from 'react'
 import '../../css/ProductCarousel.css'
 import ProductCardBase from './ProductCardBase'
+import arrowLeft from '../../assets/icon/arrow-left-s-line.svg'
+import arrowRight from '../../assets/icon/arrow-right-s-line.svg'
 
 export default function ProductCarousel({ items = [] }) {
     
@@ -11,7 +13,7 @@ export default function ProductCarousel({ items = [] }) {
 	// mobile: hasta 2, desktop: hasta 5
 	const viewportConfig = useMemo(() => {
 		if (typeof window !== 'undefined' && window.innerWidth >= 767) {
-			return { perView: Math.min(2, 5), gap: 16 }
+			return { perView: 4, gap: 16 }
 		}
 		return { perView: 2, gap: 12 }
 	}, [])
@@ -46,20 +48,55 @@ export default function ProductCarousel({ items = [] }) {
 
 	return (
 		<div className="pcarousel">
-			<div className="pcarousel-track" ref={trackRef}>
-				{items.map((p) => (
-					<div className="pcarousel-slide" key={p.id}>
-						<ProductCardBase
-							image={p.imagen}
-							title={p.nombre}
-							category={p.categoria}
-							price={p.precio}
-							origin={p.origen}
-							brand={p.marca}
-						/>
-					</div>
-				))}
+			<div className="pcarousel-inner">
+				<button
+					className="pcarousel-nav pcarousel-nav--prev"
+					aria-label="Anterior"
+					onClick={() => {
+						const el = trackRef.current
+						if (!el) return
+						const positions = Math.max(1, items.length - viewportConfig.perView + 1)
+						const slideWidth = el.clientWidth / viewportConfig.perView
+						const newIndex = (activeIndex - 1 + positions) % positions
+						setActiveIndex(newIndex)
+						el.scrollTo({ left: newIndex * slideWidth, behavior: 'smooth' })
+					}}
+				>
+					<img src={arrowLeft} alt="" aria-hidden="true" />
+				</button>
+
+				<div className="pcarousel-track" ref={trackRef}>
+					{items.map((p) => (
+						<div className="pcarousel-slide" key={p.id}>
+							<ProductCardBase
+								image={p.imagen}
+								title={p.nombre}
+								category={p.categoria}
+								price={p.precio}
+								origin={p.origen}
+								brand={p.marca}
+							/>
+						</div>
+					))}
+				</div>
+
+				<button
+					className="pcarousel-nav pcarousel-nav--next"
+					aria-label="Siguiente"
+					onClick={() => {
+						const el = trackRef.current
+						if (!el) return
+						const positions = Math.max(1, items.length - viewportConfig.perView + 1)
+						const slideWidth = el.clientWidth / viewportConfig.perView
+						const newIndex = (activeIndex + 1) % positions
+						setActiveIndex(newIndex)
+						el.scrollTo({ left: newIndex * slideWidth, behavior: 'smooth' })
+					}}
+				>
+					<img src={arrowRight} alt="" aria-hidden="true" />
+				</button>
 			</div>
+
 			<div className="pcarousel-dots">
 				{Array.from({ length: dots }).map((_, i) => (
 					<button

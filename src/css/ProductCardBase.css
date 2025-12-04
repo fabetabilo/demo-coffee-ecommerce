@@ -8,7 +8,7 @@
 
 	--btn-add-to-cart: #000;
 	--btn-add-to-cart-hover: #fff;
-	
+
 }
 
 
@@ -29,12 +29,16 @@
 	width: 100%;
 	background: #fff; /* asegura continuidad con la imagen del producto */
 	position: relative; /* permite posicionar el boton "dentro" del media */
+	overflow: hidden; /* asegura que la imagen no desborde el area */
+	height: 240px;
 }
 
 .pcb-media img {
 	display: block;
 	width: 100%;
-	height: auto;
+	height: 100%;
+	object-fit: cover; /* llena todo el contenedor, recortando si es necesario */
+	object-position: center center; /* centra la imagen dentro del área */
 }
 
 .pcb-body {
@@ -128,6 +132,10 @@
 	.pcb-body {
 		padding: 36px;
 		min-height: 110px;
+	}
+
+	.pcb-media {
+		height: 310px;
 	}
 
 	.pcb-add-btn { display: none; }

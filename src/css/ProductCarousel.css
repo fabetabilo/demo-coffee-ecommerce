@@ -47,6 +47,7 @@
 	background: rgba(0,0,0,.6);
 }
 
+.pcarousel-nav { display: none; }
 
 
 
@@ -54,25 +55,76 @@
 
 
 /*	 desktop/tablet		*/
-/* hasta 5 por fila */
+/* hasta 4 por fila */
 @media (min-width: 767px) {
 	.pcarousel {
 		border-radius: 24px;
 		padding: 20px;
+		display: flex;
+		justify-content: center;
+		position: relative; /* posicion relativa para ubicar botones nav */
 	}
 
-	/* una sola fila, hasta 5 columnas visibles; scroll horizontal si hay más */
+	.pcarousel-inner {
+		width: 100%;
+		max-width: 1280px; /* ancho del track centrado */
+		margin: 0 auto;
+		position: relative; /* contenedor relativo para ubicar botones respecto al track */
+	}
+	/* una sola fila, hasta 4 columnas visibles; scroll horizontal si hay más */
 	.pcarousel-track {
 		display: grid;
+		min-width: 1020px;
+		max-width: 1280px;
 		grid-auto-flow: column;
-		grid-auto-columns: calc((100% - (4 * 16px)) / 5);
+		grid-auto-columns: calc((100% - (4 * 16px)) / 4); /* 4 columnas */
 		gap: 16px;
-		justify-content: center; /* centrar cuando hay menos de 5 ítems */
+		justify-content: start;
 		overflow-x: auto;
 		scroll-snap-type: x proximity;
 	}
 
 	.pcarousel-dots { display: none; }
 
+	/* nav btn carrusel */
+	.pcarousel-nav {
+		position: absolute;
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		background-color: transparent;
+		border: 2px solid;
+		border-color: #000000;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		transition: background 180ms ease, border-color 180ms ease;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.pcarousel-nav img {
+		width: 20px;
+		height: 20px;
+		transition: filter 180ms ease;
+	}
+
+	.pcarousel-nav:hover,
+	.pcarousel-nav:active,
+	.pcarousel-nav:focus-visible {
+		background: #000;
+		border-color: #000;
+	}
+
+	.pcarousel-nav:hover img,
+	.pcarousel-nav:active img,
+	.pcarousel-nav:focus-visible img {
+		filter: invert(1);
+	}
+
+	/* mueve los botones fuera del carousel */
+	.pcarousel-nav--prev { left: -56px; }
+	.pcarousel-nav--next { right: -56px; }
 }
 
