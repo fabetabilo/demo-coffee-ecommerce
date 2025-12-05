@@ -14,8 +14,8 @@
 .pcarousel-track {
 	display: grid;
 	grid-auto-flow: column;
-	grid-auto-columns: calc((100% - 12px) / 2);
-	gap: 12px;
+	grid-auto-columns: calc((100% - var(--gap-mobile)) / var(--per-view-mobile));
+	gap: var(--gap-mobile);
 	overflow-x: auto;
 	scroll-snap-type: x mandatory;
 	-webkit-overflow-scrolling: touch;
@@ -55,8 +55,87 @@
 
 
 /*	 desktop/tablet		*/
-/* hasta 4 por fila */
-@media (min-width: 767px) {
+/* tablet: 3 por fila  */
+@media (min-width: 768px) and (max-width: 1199px) {
+	.pcarousel {
+		border-radius: 24px;
+		padding: 20px;
+		display: flex;
+		justify-content: center;
+		position: relative; /* posicion relativa para ubicar botones nav */
+	}
+
+	.pcarousel-inner {
+		width: 100%;
+		max-width: 1024px; /* ancho ok para tablet */
+		margin: 0 auto;
+		position: relative; /* contenedor relativo para ubicar botones respecto al track */
+	}
+
+	/* una sola fila, 3 columnas visibles; scroll horizontal si hay mas */
+	.pcarousel-track {
+		display: grid;
+		min-width: 768px;
+		max-width: 1024px;
+		grid-auto-flow: column;
+		grid-auto-columns: calc((100% - (var(--per-view-tablet) * var(--gap-tablet))) / var(--per-view-tablet)); /* 3 columnas */
+		gap: var(--gap-tablet);
+		justify-content: start;
+		overflow-x: auto;
+		scroll-snap-type: x proximity;
+	}
+
+	.pcarousel-dots { display: none; }
+
+	/* nav btn carrusel */
+	.pcarousel-nav {
+		position: absolute;
+		width: var(--carousel-nav-size-tablet);
+		height: var(--carousel-nav-size-tablet);
+		border-radius: 50%;
+		background-color: transparent;
+		border: 2px solid;
+		border-color: #000000;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		transition: background 180ms ease, border-color 180ms ease;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.pcarousel-nav img {
+		width: 18px;
+		height: 18px;
+		transition: filter 180ms ease;
+	}
+
+	.pcarousel-nav:hover,
+	.pcarousel-nav:active,
+	.pcarousel-nav:focus-visible {
+		background: #000;
+		border-color: #000;
+	}
+
+	.pcarousel-nav:hover img,
+	.pcarousel-nav:active img,
+	.pcarousel-nav:focus-visible img {
+		filter: invert(1);
+	}
+
+	/* mueve los botones fuera del carousel, offset menor para tablet */
+	.pcarousel-nav--prev { left: calc(-1 * var(--carousel-nav-offset-tablet)); }
+	.pcarousel-nav--next { right: calc(-1 * var(--carousel-nav-offset-tablet)); }
+}
+
+
+
+
+
+
+/* desktop: hasta 4 por fila */
+@media (min-width: 1200px) {
 	.pcarousel {
 		border-radius: 24px;
 		padding: 20px;
@@ -77,8 +156,8 @@
 		min-width: 1020px;
 		max-width: 1280px;
 		grid-auto-flow: column;
-		grid-auto-columns: calc((100% - (4 * 16px)) / 4); /* 4 columnas */
-		gap: 16px;
+		grid-auto-columns: calc((100% - (var(--per-view-desktop) * var(--gap-desktop))) / var(--per-view-desktop)); /* 4 columnas */
+		gap: var(--gap-desktop);
 		justify-content: start;
 		overflow-x: auto;
 		scroll-snap-type: x proximity;
@@ -89,8 +168,8 @@
 	/* nav btn carrusel */
 	.pcarousel-nav {
 		position: absolute;
-		width: 44px;
-		height: 44px;
+		width: var(--carousel-nav-size-desktop);
+		height: var(--carousel-nav-size-desktop);
 		border-radius: 50%;
 		background-color: transparent;
 		border: 2px solid;
@@ -124,7 +203,7 @@
 	}
 
 	/* mueve los botones fuera del carousel */
-	.pcarousel-nav--prev { left: -56px; }
-	.pcarousel-nav--next { right: -56px; }
+	.pcarousel-nav--prev { left: calc(-1 * var(--carousel-nav-offset-desktop)); }
+	.pcarousel-nav--next { right: calc(-1 * var(--carousel-nav-offset-desktop)); }
 }
 

@@ -6,6 +6,8 @@
 
 :root {
     --home-bg-primary: #fff;
+    --app-padding-left-tablet: 24px;
+    --app-padding-right-tablet: 24px;
 }
 
 
@@ -46,13 +48,30 @@
 
 
 
+/*  tablet   */
+@media (min-width: 768px) and (max-width: 1199px) {
+    
+    .main-container {
+        padding-left: var(--app-padding-left-tablet);
+        padding-right: var(--app-padding-right-tablet);
+        padding-top: 36px;
+        padding-bottom: 52px;
+    }
+
+    .page-heading {
+        font-size: 36px;
+    }
+
+    .page-heading-grip {
+        height: 5px;
+    }
+}
 
 
 
 
-/*   desktop/tablet    */
-
-@media (min-width: 767px) {
+/*  desktop  */
+@media(min-width: 1200px)  {
     .main-container {
         padding-left: var(--app-padding-left-desktop);
         padding-right: var(--app-padding-right-desktop);

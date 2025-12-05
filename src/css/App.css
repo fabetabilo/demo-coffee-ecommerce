@@ -227,7 +227,7 @@
 }
 
 /* IMPORTANTE: en mobile el panel desktop no se muestra */
-@media (max-width: 766px) {
+@media (max-width: 768px) {
   .search-desktop, .search-desktop-backdrop { display: none; }
 }
 
@@ -446,9 +446,180 @@
 
 
 
-/* 2. desarrollo desktop / tablet */
+/* 2. desarrollo tablet */
 
-@media (min-width: 767px) {
+/* 2. desarrollo tablet
+  Referencias globales (index.css):
+  --bp-tablet-min: 768px; --bp-tablet-max: 1199px; --bp-desktop-min: 1200px;
+  Nota: CSS variables no pueden usarse dentro de @media.
+*/
+@media (min-width: 768px) and (max-width: 1199px) {
+
+  .nav-mobile { 
+    padding: var(--navbar-padding-tablet); 
+    background: var(--navbar-bg);
+  }
+
+  .nav-left .nav-logo img { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: var(--logo-height-tablet); 
+  }
+  .nav-left .nav-logo { 
+    height: var(--logo-height-tablet);
+  }
+
+  .nav-items { 
+    display: flex; 
+    gap: 18px; 
+    margin-left: auto; 
+    margin-right: auto; 
+    align-items: center; 
+  }
+
+  .hamburger-btn { display: none; }
+  .sheet, .sheet-backdrop { display: none; }
+
+  .nav-items a {
+    color: var(--text-link-color);
+    text-decoration: none;
+    font-weight: 400;
+    font-size: var(--font-size-big);
+    padding: 10px 16px; 
+    border-radius: 999px; 
+    transition: background var(--accent-fade), color var(--accent-fade), box-shadow var(--accent-fade);
+  }
+  /* tablet search overlay */
+  .search-desktop-backdrop {
+    position: fixed; 
+    inset: 0; 
+    background: var(--app-bg-blur);
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 200ms ease; 
+    z-index: 49;
+    display: block;
+  }
+
+  .search-desktop-backdrop.show { 
+    opacity: 1; 
+    pointer-events: auto; 
+  }
+
+  .search-desktop {
+    position: fixed; 
+    left: 0; 
+    right: 0; 
+    z-index: 50;
+    display: block;
+    padding-left: var(--navbar-padding-tablet);
+    padding-right: var(--navbar-padding-tablet);
+    opacity: 0; 
+    transform: translateY(-600px);
+    pointer-events: none;
+    transition: transform 300ms ease-out;
+  }
+
+  .search-desktop.open { 
+    opacity: 1;
+    transform: translateY(64px); 
+    pointer-events: auto; 
+  }
+  
+  .search-desktop.closing { 
+    opacity: 1; 
+    transform: translateY(-600px); 
+    pointer-events: none; 
+  }
+
+  .search-desktop-inner {
+    background: var(--sheet-bg);
+    border-bottom-left-radius: var(--app-border-radius); /* bordes del sheet */
+    border-bottom-right-radius: var(--app-border-radius);
+    box-shadow: var(--sheet-shadow);
+    padding-left: var(--app-padding-left-tablet);
+    padding-right: var(--app-padding-right-tablet);
+    display: flex; 
+    flex-direction: column; 
+    gap: 16px;
+    height: 420px; /* altura para tablet */
+  }
+
+  /* contenido: izquierda y derecha en la misma fila (left | right) */
+  .search-desktop-content {
+    display: grid;
+    grid-template-columns: 320px 1fr; /* left fixed, right flexible */
+    gap: 20px;
+    align-items: start;
+  }
+
+  .search-desktop-left {
+    text-align: left;
+  }
+
+  .search-desktop-right {
+    text-align: left;
+  }
+
+  /* estado transparente en tablet: links blancos */
+  .nav-mobile.nav-transparent .nav-items a {
+    color: var(--text-primary-color-light);
+  }
+
+  /* hover tablet: fondo negro, texto blanco */
+  .nav-items a:hover { 
+    background: var(--accent-bg); 
+    color: var(--accent-text); 
+  }
+
+  .footer-section-news {
+    display: grid;  /* para el logo */
+    grid-template-columns: 1fr auto; 
+    align-items: start;
+    padding-left: var(--app-padding-left-tablet);
+    padding-right: var(--app-padding-right-tablet);
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-left: var(--app-padding-left-tablet);
+    padding-right: var(--app-padding-right-tablet);
+    gap: 40px;
+  }
+
+  .footer-logo img { height: 88px; width: auto; }
+
+  .footer-claim { 
+    grid-column: 1 / -1; 
+    margin: 32px 0 40px 0; 
+    font-size: 48px; 
+    text-align: center; 
+  }
+
+  .footer-copy {
+    padding: 24px 0 24px 0;
+    font-size: 14px;
+  }
+  /* tablet: colapsables abiertos como desktop, sin separadores ni chevrons */
+  .footer-section + .footer-section { border-top: 0; }
+  .footer-chevron { display: none; }
+  .footer-collapse,
+  .footer-collapse.open { max-height: none; opacity: 1; transform: none; overflow: visible; }
+}
+
+
+
+
+
+
+/* 3. desarrollo desktop */
+
+/* 3. desarrollo desktop
+  Referencia global (index.css): --bp-desktop-min: 1200px
+*/
+@media (min-width: 1200px) {
   
   .nav-mobile { 
     padding: var(--navbar-padding-desktop); 
@@ -533,6 +704,7 @@
     transition: opacity 200ms ease; 
     z-index: 49;
   }
+  .search-desktop-backdrop { display: block; }
   
   .search-desktop-backdrop.show { 
     opacity: 1; 
@@ -544,6 +716,7 @@
     left: 0; 
     right: 0; 
     z-index: 50;
+    display: block; /* asegurar visible en desktop */
     padding-left: var(--navbar-padding-desktop);
     padding-right: var(--navbar-padding-desktop);
     opacity: 0; 

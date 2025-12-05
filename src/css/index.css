@@ -33,12 +33,28 @@
   --app-padding-left-desktop: 144px;
   --app-padding-right-desktop: 144px;
 
+  /* responsive gaps & per-view for components */
+  --gap-mobile: 12px;
+  --gap-tablet: 16px;
+  --gap-desktop: 16px;
+  --per-view-mobile: 2;
+  --per-view-tablet: 3;
+  --per-view-desktop: 4;
+
+  /* carousel nav sizes/offsets */
+  --carousel-nav-size-tablet: 40px;
+  --carousel-nav-size-desktop: 44px;
+  --carousel-nav-offset-tablet: 48px;
+  --carousel-nav-offset-desktop: 56px; 
+
   /* navbar */
   --navbar-bg: #ffffff;
   --navbar-shadow: 0 2px 8px rgba(0,0,0,0.08);
   --navbar-padding-mobile: 16px 20px;
+  --navbar-padding-tablet: 16px 32px;
   --navbar-padding-desktop: 16px 144px;
   --logo-height-mobile: 28px;
+  --logo-height-tablet: 36px;
   --logo-height-desktop: 42px;
   --icon-size: 24px;
 
