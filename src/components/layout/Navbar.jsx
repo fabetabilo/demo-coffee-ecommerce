@@ -20,6 +20,7 @@ function Navbar() {
 	// items de navegacion (desktop)
 	const navLinks = [
 		{ label: 'Subscripción', to: '/' },
+		{ label: 'Tienda', to: '/tienda'},
 		{ label: 'Café', to: '/' },
 		{ label: 'Métodos', to: '/' },
 		{ label: 'Accesorios', to: '/' },
