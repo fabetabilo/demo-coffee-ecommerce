@@ -10,7 +10,8 @@ function Store() {
             <Banner
                 type="video"
                 src="/vid/bean2.mp4"
-                sectionTitle="Tienda"
+                className="section"
+                sectionTitle="TIENDA"
                 description="Explora nuestra tienda y encuentra tu nuevo favorito."
                 darkOverlay
             />

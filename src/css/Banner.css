@@ -1,6 +1,8 @@
 :root {
 	--banner-height-home-mobile: 480px;
 	--banner-height-home-desktop: 620px;
+	--banner-height-home-mobile-section: 340px;
+	--banner-height-home-desktop-section: 400px;
 	
 	--banner-overlay-bg: rgba(0, 0, 0, 0); /* lienzo transparente por defecto */
 	--banner-overlay-darkness: rgba(0, 0, 0, .28); /* oscurecer media para cuando sea necesario */
@@ -32,11 +34,16 @@
 }
 
 .banner-media {
-	width: 100%;
-	height: var(--banner-height-home-mobile);
+		width: 100%;
+		height: var(--banner-height-home-mobile);
 	overflow: hidden;
 	background: var(--app-bg-secondary);
 	position: relative;
+}
+
+/* variante: banner con clase "section" (altura reducida) */
+.banner.section .banner-media {
+	height: var(--banner-height-home-mobile-section);
 }
 
 .banner-el {
@@ -192,6 +199,11 @@
 
 	.banner-media {
 		height: var(--banner-height-home-desktop);
+	}
+
+	/* variante: banner con clase "section" en desktop */
+	.banner.section .banner-media {
+	  height: var(--banner-height-home-desktop-section);
 	}
 
 	.banner-title {

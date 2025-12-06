@@ -9,7 +9,7 @@
 * - type: 'video' | 'image' (por defecto: 'image')
 * - alt: string (para image)
 * - poster: string (poster opcional para video)
-* - className: string (clases extra). "left-side" alinea contenido del cta a la izquierda del banner
+* - className: string (clases extra). "left-side" alinea contenido del cta a la izquierda del banner, "section" para banner mas compacto
 * - sectionTitle: string opcional (titulo de seccion grande esquina inferior izquierda), para no colocar nada usar un string vacio " " puede funcionar mejor
 * - description: string opcional para la descripcion de alguna seccion, para no colocar descripcion, solo no incluirlo
 * - ctaText: string opcional (mensaje centrado)
