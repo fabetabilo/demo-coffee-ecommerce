@@ -1,6 +1,6 @@
 import React from 'react'
 import Banner from '../../components/ui/Banner'
-import ProductCarousel from '../../components/ui/ProductCarousel'
+import SectionGallery from '../../components/ui/SectionGallery'
 import { demoproducts } from '../../data/demo/demo-products'
 import accesoriesHero from '../../assets/img/sections/accesorios.jpg'
 import '../../css/page.css'
@@ -28,7 +28,7 @@ function Accesories() {
             />
             <div className="main-container">
                 <section className="page-section">
-                    <ProductCarousel items={accessoryProducts} />
+                    <SectionGallery items={accessoryProducts} />
                 </section>
             </div>
         </main>
