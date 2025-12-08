@@ -19,23 +19,23 @@ function Navbar() {
 
 	// items de navegacion (desktop)
 	const navLinks = [
-		{ label: 'Subscripción', to: '/' },
+		{ label: 'Subscripción', to: '/tienda/subscripcion' },
 		{ label: 'Tienda', to: '/tienda'},
-		{ label: 'Café', to: '/' },
-		{ label: 'Métodos', to: '/' },
-		{ label: 'Accesorios', to: '/' },
+		{ label: 'Café', to: '/tienda/cafe' },
+		{ label: 'Métodos', to: '/tienda/metodos' },
+		{ label: 'Accesorios', to: '/tienda/accesorios' },
 	]
 
 	// contenido del sheet de búsqueda
 	const searchCafeLinks = [
-		{ label: 'Café en grano', to: '/cafe' },
-		{ label: 'Packs+', to: '/packs' },
-		{ label: 'Subscripción', to: '/subscripcion' },
+		{ label: 'Café en grano', to: '/tienda/cafe' },
+		{ label: 'Packs+', to: '/tienda/packs' },
+		{ label: 'Subscripción', to: '/tienda/subscripcion' },
 	]
 	const searchAccesoriosLinks = [
-		{ label: 'Métodos', to: '/metodos' },
-		{ label: 'Filtros', to: '/filtros' },
-		{ label: 'Molinos', to: '/molinos' },
+		{ label: 'Métodos', to: '/tienda/metodos' },
+		{ label: 'Filtros', to: '/tienda/filtros' },
+		{ label: 'Molinos', to: '/tienda/molinos' },
 	]
 
 	// previene el scroll vertical para cuando cualquier sheet este abierto

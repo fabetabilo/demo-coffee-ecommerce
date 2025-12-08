@@ -71,7 +71,7 @@ export default function ProductCarousel({ items = [] }) {
 							<ProductCardBase
 								image={p.imagen}
 								title={p.nombre}
-								category={p.categoria}
+								category={p.subcategoria || p.categoria}	// !!!! TEMPORAAL
 								price={p.precio}
 								origin={p.origen}
 								brand={p.marca}
