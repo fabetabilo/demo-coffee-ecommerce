@@ -31,7 +31,7 @@ export default function ProductCardBase({
 	onAddToCart
 }) {
 	// normaliza la categoria y revisa si es cafe
-	const isCafe = String(category || '').toLowerCase() === 'cafe'
+	const isCafe = String(category || '').toLowerCase() === 'cafes'
 	const displayTitle = isCafe ? `Café ${title}` : title
 	const metaLabel = isCafe ? (origin || '') : (brand || '')
 

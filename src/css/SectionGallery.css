@@ -1,0 +1,29 @@
+
+
+
+.section-gallery {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: var(--gap-mobile);
+}
+
+@media (min-width: 639px) {
+	.section-gallery {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: var(--gap-mobile);
+	}
+}
+
+@media (min-width: 767px) {
+	.section-gallery {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: var(--gap-tablet);
+	}
+}
+
+@media (min-width: 1200px) {
+	.section-gallery {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: var(--gap-desktop);
+	}
+}

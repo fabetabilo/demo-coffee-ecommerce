@@ -52,6 +52,60 @@
     margin: 0px auto 12px auto;  /* centrado */
 }
 
+.coffee-filter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start; /* alinea su contenido a la izquierda */
+    border: 1px solid var(--border-lines);
+    border-radius: 24px;
+    padding: 6px 8px;
+    gap: 0;
+    margin: 0 auto 24px 0;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 60%; /* paso de deslizable  */
+    max-width: 320px;
+}
+
+.coffee-filter-item {
+    position: relative;
+    background: transparent;
+    border: 0;
+    padding: 8px 14px;
+    font-family: var(--font-family);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-title);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-secondary-color);
+    cursor: pointer;
+    transition: color 180ms ease;
+}
+
+.coffee-filter-item::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: 14px;
+    background: var(--border-lines);
+    transform: translateY(-50%);
+}
+
+.coffee-filter-item:last-of-type::after {
+    display: none;
+}
+
+.coffee-filter-item:hover,
+.coffee-filter-item:focus-visible {
+    color: var(--text-primary-color);
+}
+
+.coffee-filter-item.active {
+    color: var(--text-primary-color);
+}
+
 
 
 /*  tablet   */
@@ -71,6 +125,13 @@
     .page-heading-grip {
         height: 5px;
         margin-bottom: 30px;
+    }
+
+    .coffee-filter {
+        width: auto;
+        max-width: none;
+        margin: 0 auto 32px;
+        justify-content: center;
     }
 }
 
@@ -93,5 +154,12 @@
     .page-heading-grip {
         height: 5px;
         margin-bottom: 40px;
+    }
+
+    .coffee-filter {
+        width: auto;
+        max-width: none;
+        margin: 0 auto 40px;
+        justify-content: center;
     }
 }

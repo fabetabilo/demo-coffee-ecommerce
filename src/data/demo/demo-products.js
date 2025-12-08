@@ -8,6 +8,10 @@ import filter1 from './img/filter1.png'
 import xultra from './img/1zpresso-x-ultra-g.jpg'
 import timemoremini from './img/timemoremini.png'
 import buono from './img/buono.jpg'
+import etbirbirsa from './img/etiopia-birbirsa.png'
+import especial from './img/especial.png'
+import pinkcolombia from './img/pink.png'
+import nowhitebg from './img/nowhite.png'
 
 // productos de demo
 export const demoproducts = [
@@ -104,6 +108,46 @@ export const demoproducts = [
         categoria: "accesorios",
         subcategoria: "teteras",
         marca: "Hario"
+    },
+    {
+        id: 12,
+        nombre: "Etiopía Birbirsa",
+        precio: 16990,
+        imagen: etbirbirsa,
+        categoria: "cafes",
+        subcategoria: "cafes",
+        origen: "Etiopía",
+        proceso: "Natural"
+    },
+    {
+        id: 13,
+        nombre: "Colombia",
+        precio: 11990,
+        imagen: nowhitebg,
+        categoria: "cafes",
+        subcategoria: "cafes",
+        origen: "Colombia",
+        proceso: "Thermal Shock"
+    },
+    {
+        id: 14,
+        nombre: "Pink Bourbon",
+        precio: 15990,
+        imagen: pinkcolombia,
+        categoria: "cafes",
+        subcategoria: "cafes",
+        origen: "Colombia",
+        proceso: "Lavado"
+    },
+    {
+        id: 15,
+        nombre: "Anaeróbico Especial",
+        precio: 17990,
+        imagen: especial,
+        categoria: "cafes",
+        subcategoria: "cafes",
+        origen: "Costa Rica",
+        proceso: "Anaerobico"
     },
 
 ]
