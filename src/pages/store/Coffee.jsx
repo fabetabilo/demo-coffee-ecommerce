@@ -4,12 +4,12 @@ import SectionGallery from '../../components/ui/SectionGallery'
 import { demoproducts } from '../../data/demo/demo-products'
 import coffeeHero from '../../assets/img/sections/cafes.jpg'
 import '../../css/page.css'
-import { useNavigate } from 'react-router-dom'
+import useProductDetailNavigation from '../../hooks/useProductDetailNavigation'
 
 function Coffee() {
     // !!! TEMPORAL, luego el backend se encarga de GET coffees y filtrar !!!!
     const coffeeProducts = demoproducts.filter((product) => product.categoria === 'cafes')
-    const navigate = useNavigate()
+    const { goToProductDetail } = useProductDetailNavigation()
     const [processFilter, setProcessFilter] = useState('all')
     const filters = useMemo(() => ([
         { id: 'all', label: 'Todos' },
@@ -35,11 +35,8 @@ function Coffee() {
 
     const handleCardClick = useCallback((product) => {
         if (!product) return
-        const params = new URLSearchParams()
-        if (product.id) params.set('id', product.id)
-        const query = params.toString()
-        navigate(`/tienda/producto${query ? `?${query}` : ''}`, { state: { product } })
-    }, [navigate])
+        goToProductDetail(product)
+    }, [goToProductDetail])
 
     return (
         <main>

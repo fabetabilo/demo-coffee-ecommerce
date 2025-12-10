@@ -127,6 +127,10 @@
 		border-radius: var(--card-border-radius-desktop);
 	}
 
+	.pcb-media {
+		cursor: pointer;
+	}
+
 	.pcb-body {
 		padding: 32px;
 		min-height: 110px;

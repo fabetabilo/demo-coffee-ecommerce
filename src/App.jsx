@@ -7,6 +7,7 @@ import Store from './pages/Store'
 import Coffee from './pages/store/Coffee'
 import Accesories from './pages/store/Accesories'
 import ProductCoffee from './pages/store/ProductCoffee'
+import ProductAccesory from './pages/store/ProductAccesory'
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
           <Route path="/tienda" element={<Store />} />
           <Route path="/tienda/cafe" element={<Coffee />} />
           <Route path="/tienda/accesorios" element={<Accesories />} />
-          <Route path="/tienda/producto" element={<ProductCoffee />} />
+          <Route path="/tienda/producto/cafe" element={<ProductCoffee />} />
+          <Route path="/tienda/producto/accesorio" element={<ProductAccesory />} />
         </Routes>
       <Footer />
     </>

@@ -4,7 +4,7 @@ import SectionGallery from '../../components/ui/SectionGallery'
 import { demoproducts } from '../../data/demo/demo-products'
 import accesoriesHero from '../../assets/img/sections/accesorios.jpg'
 import '../../css/page.css'
-import { useNavigate } from 'react-router-dom'
+import useProductDetailNavigation from '../../hooks/useProductDetailNavigation'
 
 function Accesories() {
     // tipos que consideramos "accesorio"
@@ -16,15 +16,12 @@ function Accesories() {
         return accessoryTypes.includes(String(prod.subcategoria || '').toLowerCase())
     })
 
-    const navigate = useNavigate()
+    const { goToProductDetail } = useProductDetailNavigation()
 
     const handleCardClick = useCallback((product) => {
         if (!product) return
-        const params = new URLSearchParams()
-        if (product.id) params.set('id', product.id)
-        const query = params.toString()
-        navigate(`/tienda/producto${query ? `?${query}` : ''}`, { state: { product } })
-    }, [navigate])
+        goToProductDetail(product)
+    }, [goToProductDetail])
 
     return (
         <main>

@@ -12,6 +12,7 @@ import etbirbirsa from './img/etiopia-birbirsa.png'
 import especial from './img/especial.png'
 import pinkcolombia from './img/pink.png'
 import nowhitebg from './img/nowhite.png'
+import filter2 from './img/b75filters.png'
 
 // productos de demo
 export const demoproducts = [
@@ -75,6 +76,7 @@ export const demoproducts = [
         categoria: "accesorios",
         subcategoria: "metodos",
         marca: "Hario",
+        description: "Cono V60 con acabado rosado que aporta estabilidad termica y consistencia en vertidos controlados."
     },
     {
         id: 7,
@@ -84,6 +86,7 @@ export const demoproducts = [
         categoria: "accesorios",
         subcategoria: "metodos",
         marca: "Chemex",
+        description: "Metodo iconico de vidrio con mango de madera ideal para preparar hasta seis tazas limpias y brillantes."
     },
     {
         id: 8,
@@ -93,6 +96,7 @@ export const demoproducts = [
         categoria: "accesorios",
         subcategoria: "filtros",
         marca: "Origami",
+        description: "Paquete de filtros Origami tamano S hechos de papel grueso para un flujo estable y aclarado rapido."
     },
     {
         id: 9,
@@ -101,7 +105,8 @@ export const demoproducts = [
         imagen: xultra,
         categoria: "accesorios",
         subcategoria: "molinos",
-        marca: "1Zpresso"
+        marca: "1Zpresso",
+        description: "Molino manual premium con ajuste externo numerado y fresa de acero para moliendas precisas."
     },
     {
         id: 10,
@@ -110,7 +115,8 @@ export const demoproducts = [
         imagen: timemoremini,
         categoria: "accesorios",
         subcategoria: "balanzas",
-        marca: "Timemore"
+        marca: "Timemore",
+        description: "Balanza compacta con cronometro integrado y superficie antideslizante para barras minimalistas."
     },
     {
         id: 11,
@@ -119,7 +125,8 @@ export const demoproducts = [
         imagen: buono,
         categoria: "accesorios",
         subcategoria: "teteras",
-        marca: "Hario"
+        marca: "Hario",
+        description: "Gooseneck clasica de acero inoxidable con control total del caudal para preparaciones por vertido."
     },
     {
         id: 12,
@@ -172,6 +179,16 @@ export const demoproducts = [
         roastLevel: 2,
         descriptors: ["Maracuyá", "Caña de azúcar", "Flores"],
         description: "Proceso anaeróbico controlado que entrega una taza tropical, efervescente y extremadamente limpia."
+    },
+    {
+        id: 16,
+        nombre: "Filtros Timemore B75",
+        precio: 9990,
+        imagen: filter2,
+        categoria: "accesorios",
+        subcategoria: "filtros",
+        marca: "Timemore",
+        description: "Filtros de papel para Timemore B75 con madera importada de Japón. Sin aditivos ni olores para una delicada taza. \nContiene 50 filtros."
     },
 
 ]
