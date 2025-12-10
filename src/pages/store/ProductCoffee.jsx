@@ -1,18 +1,8 @@
 import React, { useMemo, useState } from 'react'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { demoproducts } from '../../data/demo/demo-products'
+import useTotalPrice from '../../hooks/useTotalPrice'
 import '../../css/ProductCoffee.css'
-
-const clpFormatter = new Intl.NumberFormat('es-CL', {
-	style: 'currency',
-	currency: 'CLP',
-	maximumFractionDigits: 0
-})
-
-const formatCLP = (value) => {
-	if (typeof value !== 'number') return ''
-	return clpFormatter.format(value)
-}
 
 const weightOptions = [
 	{ id: '250g', label: '250G' },
@@ -48,6 +38,11 @@ function ProductCoffee() {
 		return demoproducts.find((item) => item.id === productId)
 	}, [productId, stateProduct])
 
+	const { formattedUnit: unitPriceLabel, formattedTotal: totalPriceLabel } = useTotalPrice({
+		unitPrice: product?.precio ?? 0,
+		quantity
+	})
+
 	const handleQuantityChange = (delta) => {
 		setQuantity((prev) => Math.max(1, prev + delta))
 	}
@@ -67,7 +62,7 @@ function ProductCoffee() {
 	const coffeeProduct = isCoffee(product)
 	const descriptorList = Array.isArray(product.descriptors) ? product.descriptors : []
 	const roastLevel = coffeeProduct ? Number(product.roastLevel || 0) : 0
-	const priceLabel = formatCLP(product.precio)
+	const priceLabel = unitPriceLabel
 
 	return (
 		<main>
@@ -195,7 +190,7 @@ function ProductCoffee() {
 
 						<div className="product-actions">
 							<button type="button" className="primary-cta">
-								Agregar al carrito {priceLabel ? `- ${priceLabel}` : ''}
+								Agregar al carrito {totalPriceLabel ? `- ${totalPriceLabel}` : ''}
 							</button>
 							<button type="button" className="secondary-cta">Comprar ahora</button>
 						</div>
