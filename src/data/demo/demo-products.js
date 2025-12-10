@@ -23,7 +23,10 @@ export const demoproducts = [
         categoria: "cafes",
         subcategoria: "cafes",
         origen: "Colombia",
-        proceso: "Lavado"
+        proceso: "Lavado",
+        roastLevel: 3,
+        descriptors: ["Frutilla", "Caramelo", "Vainilla"],
+        description: "Un lote vibrante de Pink Bourbon con acidez brillante y dulzor jugoso que recuerda a frutas rojas recién cortadas."
     },
     {
         id: 3,
@@ -33,7 +36,10 @@ export const demoproducts = [
         categoria: "cafes",
         subcategoria: "cafes",
         origen: "Panama",
-        proceso: "Lavado"
+        proceso: "Lavado",
+        roastLevel: 2,
+        descriptors: ["Jazmín", "Miel", "Mandarina"],
+        description: "Geisha cultivado en altura con fragancia floral, cuerpo sedoso y una taza compleja que evoluciona a medida que enfría."
     },
     {
         id: 4,
@@ -43,7 +49,10 @@ export const demoproducts = [
         categoria: "cafes",
         subcategoria: "cafes",
         origen: "Etiopia",
-        proceso: "Natural"
+        proceso: "Natural",
+        roastLevel: 4,
+        descriptors: ["Frutos rojos", "Cacao", "Lavanda"],
+        description: "Café natural etiopía con textura aterciopelada y notas de frutos rojos maduros que se mezclan con cacao y flores."
     },
     {
         id: 5,
@@ -53,7 +62,10 @@ export const demoproducts = [
         categoria: "cafes",
         subcategoria: "cafes",
         origen: "Colombia",
-        proceso: "Honey"
+        proceso: "Honey",
+        roastLevel: 3,
+        descriptors: ["Panela", "Cacao", "Durazno"],
+        description: "Proceso honey que resalta la dulzura de panela, con un final de cacao y fruta de hueso madura."
     },
     {
         id: 6,
@@ -117,7 +129,10 @@ export const demoproducts = [
         categoria: "cafes",
         subcategoria: "cafes",
         origen: "Etiopía",
-        proceso: "Natural"
+        proceso: "Natural",
+        roastLevel: 4,
+        descriptors: ["Mora", "Chocolate", "Flor de azahar"],
+        description: "Un perfil jugoso con acidez tipo mora y residual floral limpio."
     },
     {
         id: 13,
@@ -127,7 +142,10 @@ export const demoproducts = [
         categoria: "cafes",
         subcategoria: "cafes",
         origen: "Colombia",
-        proceso: "Thermal Shock"
+        proceso: "Thermal Shock",
+        roastLevel: 5,
+        descriptors: ["Chocolate amargo", "Cítricos", "Especias"],
+        description: "Perfil intenso con cuerpo cremoso y un final especiado que persiste."
     },
     {
         id: 14,
@@ -137,7 +155,10 @@ export const demoproducts = [
         categoria: "cafes",
         subcategoria: "cafes",
         origen: "Colombia",
-        proceso: "Lavado"
+        proceso: "Lavado",
+        roastLevel: 3,
+        descriptors: ["Frutos rojos", "Miel", "Cítricos"],
+        description: "Versión más intensa del Pink Bourbon con notas dulces de miel y acidez cítrica brillante."
     },
     {
         id: 15,
@@ -147,7 +168,10 @@ export const demoproducts = [
         categoria: "cafes",
         subcategoria: "cafes",
         origen: "Costa Rica",
-        proceso: "Anaerobico"
+        proceso: "Anaerobico",
+        roastLevel: 2,
+        descriptors: ["Maracuyá", "Caña de azúcar", "Flores"],
+        description: "Proceso anaeróbico controlado que entrega una taza tropical, efervescente y extremadamente limpia."
     },
 
 ]

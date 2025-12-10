@@ -1,13 +1,15 @@
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import Banner from '../../components/ui/Banner'
 import SectionGallery from '../../components/ui/SectionGallery'
 import { demoproducts } from '../../data/demo/demo-products'
 import coffeeHero from '../../assets/img/sections/cafes.jpg'
 import '../../css/page.css'
+import { useNavigate } from 'react-router-dom'
 
 function Coffee() {
     // !!! TEMPORAL, luego el backend se encarga de GET coffees y filtrar !!!!
     const coffeeProducts = demoproducts.filter((product) => product.categoria === 'cafes')
+    const navigate = useNavigate()
     const [processFilter, setProcessFilter] = useState('all')
     const filters = useMemo(() => ([
         { id: 'all', label: 'Todos' },
@@ -30,6 +32,14 @@ function Coffee() {
             return proceso === normalized
         })
     }, [coffeeProducts, processFilter])
+
+    const handleCardClick = useCallback((product) => {
+        if (!product) return
+        const params = new URLSearchParams()
+        if (product.id) params.set('id', product.id)
+        const query = params.toString()
+        navigate(`/tienda/producto${query ? `?${query}` : ''}`, { state: { product } })
+    }, [navigate])
 
     return (
         <main>
@@ -67,7 +77,7 @@ function Coffee() {
                             )
                         })}
                     </div>
-                    <SectionGallery items={filteredProducts} />
+                    <SectionGallery items={filteredProducts} onCardClick={handleCardClick} />
                 </section>
             </div>
         </main>
