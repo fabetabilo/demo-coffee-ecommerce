@@ -56,7 +56,7 @@
 	gap: 0.5rem;
 	flex-wrap: wrap;
 	margin-bottom: 1rem;
-	margin-top: 1.5rem;
+	margin-top: 0rem;
 }
 
 .product-meta-pill {
@@ -316,6 +316,10 @@
 	.main-product-container {
 		padding-left: var(--app-padding-left-tablet);
 		padding-right: var(--app-padding-right-tablet);
+	}
+
+	.product-meta {
+		margin-top: 1.5rem;
 	}
 
 	.product-hero {

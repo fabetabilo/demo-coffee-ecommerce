@@ -12,7 +12,7 @@
 	-webkit-overflow-scrolling: touch;
 	border-radius: 0px;
 	background: #fff;
-	touch-action: pan-x;
+	touch-action: pan-x, pan-y;
 }
 
 .pimg-track::-webkit-scrollbar {
@@ -57,6 +57,25 @@
 	width: 20px;
 }
 
+.pimg-nav {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: var(--carousel-nav-size-desktop);
+	height: var(--carousel-nav-size-desktop);
+	border-radius: 50%;
+	border: 1.5px solid;
+	border-color: #000000;
+	background: transparent;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	color: #fff;
+    transition: background 180ms ease, border-color 180ms ease;
+}
+
+
 
 
 
@@ -66,5 +85,41 @@
 		border-radius: 0px;
 	}
 
+	.pimg-nav {
+		display: flex;
+	}
+
+    .pimg-nav.pimg-nav--prev img {
+    width: 20px;
+	height: 20px;
+	transition: filter 180ms ease;
+    }
+
+    .pimg-nav.pimg-nav--next img {
+    width: 20px;
+	height: 20px;
+	transition: filter 180ms ease;
+    }
+
+    .pimg-nav--prev {
+	left: calc(-1 * var(--carousel-nav-offset-desktop));
+    }
+    
+    .pimg-nav--next {
+	right: calc(-1 * var(--carousel-nav-offset-desktop));
+    }
+
+    .pimg-nav:hover,
+	.pimg-nav:active,
+	.pimg-nav:focus-visible {
+		background: #000;
+		border-color: #000;
+	}
+
+	.pimg-nav:hover img,
+	.pimg-nav:active img,
+	.pimg-nav:focus-visible img {
+		filter: invert(1);
+	}
 	
 }

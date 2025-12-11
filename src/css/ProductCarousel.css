@@ -30,21 +30,24 @@
 .pcarousel-dots {
 	display: flex;
 	justify-content: center;
-	gap: 8px;
-	margin-top: 12px;
+	gap: 0.4rem;
+	margin-top: 1rem;
 }
 
 .pcarousel-dot {
-	width: 4px;
+	width: 8px;
 	height: 8px;
 	border-radius: 999px;
-	border: 0;
-	background: rgba(0,0,0,.18);
+	background: rgba(17, 17, 17, 0.2);
+	border: none;
+	padding: 0;
+	transition: background 0.2s ease, width 0.2s ease;
 	cursor: pointer;
 }
 
 .pcarousel-dot.active {
-	background: rgba(0,0,0,.6);
+	background: #111;
+	width: 20px;
 }
 
 .pcarousel-nav { display: none; }
