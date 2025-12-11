@@ -25,7 +25,7 @@ export default function useMinProductPrice() {
 			}
 		}
 
-		return typeof item.precio === 'number' ? item.precio : null
+		return typeof item.price === 'number' ? item.price : null
 	}, [])
 
 	return getMinProductPrice

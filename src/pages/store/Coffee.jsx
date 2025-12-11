@@ -8,7 +8,7 @@ import useProductDetailNavigation from '../../hooks/useProductDetailNavigation'
 
 function Coffee() {
     // !!! TEMPORAL, luego el backend se encarga de GET coffees y filtrar !!!!
-    const coffeeProducts = demoproducts.filter((product) => product.categoria === 'cafes')
+    const coffeeProducts = demoproducts.filter((product) => product.category === 'cafes')
     const { goToProductDetail } = useProductDetailNavigation()
     const [processFilter, setProcessFilter] = useState('all')
     const filters = useMemo(() => ([
@@ -24,12 +24,12 @@ function Coffee() {
         const normalized = processFilter.toLowerCase()
         const known = new Set(['lavado', 'natural', 'honey'])
         return coffeeProducts.filter((product) => {
-            const proceso = String(product.proceso || '').toLowerCase()
-            if (!proceso) return normalized === 'otros'
+            const process = String(product.process || '').toLowerCase()
+            if (!process) return normalized === 'otros'
             if (normalized === 'otros') {
-                return !known.has(proceso)
+                return !known.has(process)
             }
-            return proceso === normalized
+            return process === normalized
         })
     }, [coffeeProducts, processFilter])
 

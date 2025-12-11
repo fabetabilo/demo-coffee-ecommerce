@@ -22,7 +22,7 @@ export default function ProductCarousel({ items = [] }) {
 	})
 
 	const getMinProductPrice = useMinProductPrice()
-	const isCoffeeItem = (item) => String(item?.subcategoria || item?.categoria || '').toLowerCase() === 'cafes'
+	const isCoffeeItem = (item) => String(item?.subcategory || item?.category || '').toLowerCase() === 'cafes'
 
 	return (
 		<div className="pcarousel">
@@ -42,12 +42,12 @@ export default function ProductCarousel({ items = [] }) {
 								<ProductCardCoffee product={p} />
 							) : (
 								<ProductCardBase
-									image={p.imagen}
-									title={p.nombre}
-									category={p.subcategoria || p.categoria}
+									image={p.image}
+									title={p.name}
+									category={p.subcategory || p.category}
 									price={getMinProductPrice(p)}
-									origin={p.origen}
-									brand={p.marca}
+									origin={p.origin}
+									brand={p.brand}
 								/>
 							)}
 						</div>

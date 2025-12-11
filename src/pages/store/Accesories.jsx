@@ -12,8 +12,8 @@ function Accesories() {
 
     const accessoryProducts = demoproducts.filter((prod) => {
         // categoria, o subcategoria
-        if (prod.categoria === 'accesorios') return true
-        return accessoryTypes.includes(String(prod.subcategoria || '').toLowerCase())
+        if (prod.category === 'accesorios') return true
+        return accessoryTypes.includes(String(prod.subcategory || '').toLowerCase())
     })
 
     const { goToProductDetail } = useProductDetailNavigation()

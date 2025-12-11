@@ -11,7 +11,7 @@ const grindOptions = [
 ]
 
 function isCoffee(product) {
-	return String(product?.categoria || '').toLowerCase() === 'cafes'
+	return String(product?.category || '').toLowerCase() === 'cafes'
 }
 
 function ProductCoffee() {
@@ -52,7 +52,7 @@ function ProductCoffee() {
 				id: 'default',
 				label: '250G',
 				grams: 250,
-				price: product.precio,
+				price: product.price,
 				available: true
 			}
 		]
@@ -68,7 +68,7 @@ function ProductCoffee() {
 	}, [weightOptions, selectedWeightId])
 
 	const { formattedUnit: unitPriceLabel, formattedTotal: totalPriceLabel } = useTotalPrice({
-		unitPrice: currentWeight?.price ?? product?.precio ?? 0,
+		unitPrice: currentWeight?.price ?? product?.price ?? 0,
 		quantity
 	})
 
@@ -78,7 +78,7 @@ function ProductCoffee() {
 		if (fromProduct.length > 0) return fromProduct
 		const legacy = Array.isArray(product.galleryImages) ? product.galleryImages.filter(Boolean) : []
 		if (legacy.length > 0) return legacy
-		return product.imagen ? [product.imagen] : []
+		return product.image ? [product.image] : []
 	}, [product])
 
 	const handleQuantityChange = (delta) => {
@@ -109,20 +109,20 @@ function ProductCoffee() {
 				<div className="product-layout">
 					<section className="product-hero" aria-labelledby="product-title">
 						<div className="product-hero-frame">
-							<ProductImageCarousel images={galleryImages} alt={product.nombre} />
+							<ProductImageCarousel images={galleryImages} alt={product.name} />
 						</div>
 					</section>
 					<section className="product-detail" aria-live="polite">
 						<div className="product-meta">
-							{coffeeProduct && product.origen && (
-								<span className="product-meta-pill">{product.origen}</span>
+							{coffeeProduct && product.origin && (
+								<span className="product-meta-pill">{product.origin}</span>
 							)}
-							{coffeeProduct && product.proceso && (
-								<span className="product-meta-pill">{product.proceso}</span>
+							{coffeeProduct && product.process && (
+								<span className="product-meta-pill">{product.process}</span>
 							)}
 						</div>
 						<h1 id="product-title" className="product-title">
-							{product.nombre}
+							{product.name}
 						</h1>
 						<p className="product-price">{priceLabel}</p>
 

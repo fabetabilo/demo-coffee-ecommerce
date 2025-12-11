@@ -28,8 +28,8 @@ export const getProductDetailPath = (product) => {
 		product.detalleTipo,
 		product.tipoDetalle,
 		product.tipo,
-		product.categoria,
-		product.subcategoria
+		product.category,
+		product.subcategory
 	]
 
 	for (const candidate of candidates) {

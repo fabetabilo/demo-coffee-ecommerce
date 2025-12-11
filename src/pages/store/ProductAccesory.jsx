@@ -4,7 +4,7 @@ import { demoproducts } from '../../data/demo/demo-products'
 import useTotalPrice from '../../hooks/useTotalPrice'
 import '../../css/ProductAccesory.css'
 
-const isAccessory = (product) => String(product?.categoria || '').toLowerCase() === 'accesorios'
+const isAccessory = (product) => String(product?.category || '').toLowerCase() === 'accesorios'
 
 function ProductAccesory() {
 	const [searchParams] = useSearchParams()
@@ -25,7 +25,7 @@ function ProductAccesory() {
 	}, [productId, stateProduct])
 
 	const { formattedUnit: unitPriceLabel, formattedTotal: totalPriceLabel } = useTotalPrice({
-		unitPrice: product?.precio ?? 0,
+		unitPrice: product?.price ?? 0,
 		quantity
 	})
 
@@ -45,8 +45,8 @@ function ProductAccesory() {
 		)
 	}
 
-	const metaBrand = product.marca ? product.marca.toUpperCase() : ''
-	const metaCategory = product.subcategoria ? product.subcategoria.toUpperCase() : ''
+	const metaBrand = product.brand ? product.brand.toUpperCase() : ''
+	const metaCategory = product.subcategory ? product.subcategory.toUpperCase() : ''
 
 	return (
 		<main>
@@ -55,7 +55,7 @@ function ProductAccesory() {
 				<div className="product-layout">
 					<section className="product-hero" aria-labelledby="product-title">
 						<div className="product-hero-frame">
-							<img src={product.imagen} alt={product.nombre} loading="lazy" />
+							<img src={product.image} alt={product.name} loading="lazy" />
 						</div>
 					</section>
 					<section className="product-detail" aria-live="polite">
@@ -64,7 +64,7 @@ function ProductAccesory() {
 							{metaCategory && <span className="product-meta-pill">{metaCategory}</span>}
 						</div>
 						<h1 id="product-title" className="product-title">
-							{product.nombre}
+							{product.name}
 						</h1>
 						<p className="product-price">{unitPriceLabel}</p>
 

@@ -66,11 +66,11 @@ export default function ProductCardCoffee({ product, onCardClick, onAddToCart })
 
 	return (
 		<ProductCardBase
-			image={product?.imagen}
-			title={product?.nombre}
-			category={product?.subcategoria || product?.categoria}
-			origin={product?.origen}
-			brand={product?.marca}
+			image={product?.image}
+			title={product?.name}
+			category={product?.subcategory || product?.category}
+			origin={product?.origin}
+			brand={product?.brand}
 			price={price}
 			onClick={handleCardClick}
 			onAddToCart={handleAddToCart}
