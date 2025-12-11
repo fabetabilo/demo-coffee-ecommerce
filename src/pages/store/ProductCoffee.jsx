@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { demoproducts } from '../../data/demo/demo-products'
 import useTotalPrice from '../../hooks/useTotalPrice'
+import ProductImageCarousel from '../../components/ui/ProductImageCarousel'
 import '../../css/ProductCoffee.css'
 
 const weightOptions = [
@@ -43,6 +44,15 @@ function ProductCoffee() {
 		quantity
 	})
 
+	const galleryImages = useMemo(() => {
+		if (!product) return []
+		const fromProduct = Array.isArray(product.productImages) ? product.productImages.filter(Boolean) : []
+		if (fromProduct.length > 0) return fromProduct
+		const legacy = Array.isArray(product.galleryImages) ? product.galleryImages.filter(Boolean) : []
+		if (legacy.length > 0) return legacy
+		return product.imagen ? [product.imagen] : []
+	}, [product])
+
 	const handleQuantityChange = (delta) => {
 		setQuantity((prev) => Math.max(1, prev + delta))
 	}
@@ -71,7 +81,7 @@ function ProductCoffee() {
 				<div className="product-layout">
 					<section className="product-hero" aria-labelledby="product-title">
 						<div className="product-hero-frame">
-							<img src={product.imagen} alt="prod" loading="lazy" />
+							<ProductImageCarousel images={galleryImages} alt={product.nombre} />
 						</div>
 					</section>
 					<section className="product-detail" aria-live="polite">
