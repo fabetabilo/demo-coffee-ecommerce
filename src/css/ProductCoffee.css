@@ -190,6 +190,21 @@
 	border-color: #111;
 }
 
+.option-btn.option-unavailable,
+.option-btn:disabled {
+	opacity: 0.45;
+	cursor: not-allowed;
+	background: #f0eeea;
+	color: #9a948d;
+	border-color: #d4d1cc;
+}
+
+.option-unavailable-text {
+	font-size: 0.8rem;
+	text-transform: none;
+	letter-spacing: normal;
+}
+
 .product-quantity {
 	display: inline-flex;
 	align-items: center;

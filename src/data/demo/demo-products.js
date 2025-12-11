@@ -28,7 +28,23 @@ export const demoproducts = [
         proceso: "Lavado",
         roastLevel: 3,
         descriptors: ["Frutilla", "Caramelo", "Vainilla"],
-        description: "Un lote vibrante de Pink Bourbon con acidez brillante y dulzor jugoso que recuerda a frutas rojas recién cortadas."
+        description: "Un lote vibrante de Pink Bourbon con acidez brillante y dulzor jugoso que recuerda a frutas rojas recién cortadas.",
+        formats: [
+            {
+                id: '250g',
+                label: '250G',
+                grams: 250,
+                price: 11990,
+                available: true
+            },
+            {
+                id: '1kg',
+                label: '1KG',
+                grams: 1000,
+                price: 39990,
+                available: false
+            }
+        ]
     },
     {
         id: 3,
@@ -42,7 +58,23 @@ export const demoproducts = [
         proceso: "Lavado",
         roastLevel: 2,
         descriptors: ["Jazmín", "Miel", "Mandarina"],
-        description: "Geisha cultivado en altura con fragancia floral, cuerpo sedoso y una taza compleja que evoluciona a medida que enfría."
+        description: "Geisha cultivado en altura con fragancia floral, cuerpo sedoso y una taza compleja que evoluciona a medida que enfría.",
+        formats: [
+            {
+                id: '250g',
+                label: '250G',
+                grams: 250,
+                price: 14990,
+                available: true
+            },
+            {
+                id: '1kg',
+                label: '1KG',
+                grams: 1000,
+                price: 49990,
+                available: true
+            }
+        ]
     },
     {
         id: 4,
@@ -56,7 +88,23 @@ export const demoproducts = [
         proceso: "Natural",
         roastLevel: 4,
         descriptors: ["Frutos rojos", "Cacao", "Lavanda"],
-        description: "Café natural etiopía con textura aterciopelada y notas de frutos rojos maduros que se mezclan con cacao y flores."
+        description: "Café natural etiopía con textura aterciopelada y notas de frutos rojos maduros que se mezclan con cacao y flores.",
+        formats: [
+            {
+                id: '250g',
+                label: '250G',
+                grams: 250,
+                price: 15990,
+                available: true
+            },
+            {
+                id: '1kg',
+                label: '1KG',
+                grams: 1000,
+                price: 52990,
+                available: false
+            }
+        ]
     },
     {
         id: 5,
@@ -70,7 +118,23 @@ export const demoproducts = [
         proceso: "Honey",
         roastLevel: 3,
         descriptors: ["Panela", "Cacao", "Durazno"],
-        description: "Proceso honey que resalta la dulzura de panela, con un final de cacao y fruta de hueso madura."
+        description: "Proceso honey que resalta la dulzura de panela, con un final de cacao y fruta de hueso madura.",
+        formats: [
+            {
+                id: '250g',
+                label: '250G',
+                grams: 250,
+                price: 12990,
+                available: true
+            },
+            {
+                id: '1kg',
+                label: '1KG',
+                grams: 1000,
+                price: 42990,
+                available: true
+            }
+        ]
     },
     {
         id: 6,
@@ -150,7 +214,23 @@ export const demoproducts = [
         proceso: "Natural",
         roastLevel: 4,
         descriptors: ["Mora", "Chocolate", "Flor de azahar"],
-        description: "Un perfil jugoso con acidez tipo mora y residual floral limpio."
+        description: "Un perfil jugoso con acidez tipo mora y residual floral limpio.",
+        formats: [
+            {
+                id: '250g',
+                label: '250G',
+                grams: 250,
+                price: 16990,
+                available: true
+            },
+            {
+                id: '1kg',
+                label: '1KG',
+                grams: 1000,
+                price: 54990,
+                available: false
+            }
+        ]
     },
     {
         id: 13,
@@ -164,7 +244,16 @@ export const demoproducts = [
         proceso: "Thermal Shock",
         roastLevel: 5,
         descriptors: ["Chocolate amargo", "Cítricos", "Especias"],
-        description: "Perfil intenso con cuerpo cremoso y un final especiado que persiste."
+        description: "Perfil intenso con cuerpo cremoso y un final especiado que persiste.",
+        formats: [
+            {
+                id: '120g',
+                label: '120G',
+                grams: 120,
+                price: 11990,
+                available: true
+            }
+        ]
     },
     {
         id: 14,
@@ -178,7 +267,23 @@ export const demoproducts = [
         proceso: "Lavado",
         roastLevel: 3,
         descriptors: ["Frutos rojos", "Miel", "Cítricos"],
-        description: "Versión más intensa del Pink Bourbon con notas dulces de miel y acidez cítrica brillante."
+        description: "Versión más intensa del Pink Bourbon con notas dulces de miel y acidez cítrica brillante.",
+        formats: [
+            {
+                id: '250g',
+                label: '250G',
+                grams: 250,
+                price: 15990,
+                available: true
+            },
+            {
+                id: '1kg',
+                label: '1KG',
+                grams: 1000,
+                price: 49990,
+                available: true
+            }
+        ]
     },
     {
         id: 15,
@@ -192,7 +297,16 @@ export const demoproducts = [
         proceso: "Anaerobico",
         roastLevel: 2,
         descriptors: ["Maracuyá", "Caña de azúcar", "Flores"],
-        description: "Proceso anaeróbico controlado que entrega una taza tropical, efervescente y extremadamente limpia."
+        description: "Proceso anaeróbico controlado que entrega una taza tropical, efervescente y extremadamente limpia.",
+        formats: [
+            {
+                id: '120g',
+                label: '120G',
+                grams: 120,
+                price: 17990,
+                available: true
+            }
+        ]
     },
     {
         id: 16,

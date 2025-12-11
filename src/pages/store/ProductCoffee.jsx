@@ -5,11 +5,6 @@ import useTotalPrice from '../../hooks/useTotalPrice'
 import ProductImageCarousel from '../../components/ui/ProductImageCarousel'
 import '../../css/ProductCoffee.css'
 
-const weightOptions = [
-	{ id: '250g', label: '250G' },
-	{ id: '1kg', label: '1KG' }
-]
-
 const grindOptions = [
 	{ id: 'grano', label: 'Grano' },
 	{ id: 'molido', label: 'Molido' }
@@ -23,7 +18,7 @@ function ProductCoffee() {
 	const [searchParams] = useSearchParams()
 	const location = useLocation()
 	const stateProduct = location.state?.product
-	const [selectedWeight, setSelectedWeight] = useState(weightOptions[0].id)
+	const [selectedWeightId, setSelectedWeightId] = useState(null)
 	const [selectedGrind, setSelectedGrind] = useState(grindOptions[0].id)
 	const [quantity, setQuantity] = useState(1)
 
@@ -39,8 +34,35 @@ function ProductCoffee() {
 		return demoproducts.find((item) => item.id === productId)
 	}, [productId, stateProduct])
 
+	// formatos de peso derivados desde el producto
+	const weightOptions = useMemo(() => {
+		if (!product) return []
+		if (Array.isArray(product.formats) && product.formats.length > 0) {
+			return product.formats
+		}
+		// fallback para productos sin formats/formatos definidos
+		return [
+			{
+				id: 'default',
+				label: '250G',
+				grams: 250,
+				price: product.precio,
+				available: true
+			}
+		]
+	}, [product])
+
+	// formato actualmente seleccionado (o primero disponible)
+	const currentWeight = useMemo(() => {
+		if (!weightOptions.length) return null
+		if (!selectedWeightId) {
+			return weightOptions.find((w) => w.available !== false) || weightOptions[0]
+		}
+		return weightOptions.find((w) => w.id === selectedWeightId) || weightOptions[0]
+	}, [weightOptions, selectedWeightId])
+
 	const { formattedUnit: unitPriceLabel, formattedTotal: totalPriceLabel } = useTotalPrice({
-		unitPrice: product?.precio ?? 0,
+		unitPrice: currentWeight?.price ?? product?.precio ?? 0,
 		quantity
 	})
 
@@ -138,16 +160,22 @@ function ProductCoffee() {
 							<p className="product-option-label">Formato</p>
 							<div className="product-option-buttons">
 								{weightOptions.map((option) => {
-									const isSelected = option.id === selectedWeight
+									const isSelected = currentWeight ? option.id === currentWeight.id : false
+									const isAvailable = option.available !== false
 									return (
 										<button
 											type="button"
 											key={option.id}
-											className={`option-btn ${isSelected ? 'selected' : ''}`}
-											onClick={() => setSelectedWeight(option.id)}
+											className={`option-btn ${isSelected ? 'selected' : ''} ${!isAvailable ? 'option-unavailable' : ''}`.trim()}
+											onClick={() => {
+												if (!isAvailable) return
+												setSelectedWeightId(option.id)
+											}}
 											aria-pressed={isSelected}
+											disabled={!isAvailable}
 										>
 											{option.label}
+											{!isAvailable && <span className="option-unavailable-text"> (No disponible)</span>}
 										</button>
 									)
 								})}
