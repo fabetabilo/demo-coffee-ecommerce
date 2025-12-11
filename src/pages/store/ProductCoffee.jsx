@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { demoproducts } from '../../data/demo/demo-products'
 import useTotalPrice from '../../hooks/useTotalPrice'
@@ -18,9 +18,15 @@ function ProductCoffee() {
 	const [searchParams] = useSearchParams()
 	const location = useLocation()
 	const stateProduct = location.state?.product
-	const [selectedWeightId, setSelectedWeightId] = useState(null)
+	const selectedFormatFromState = location.state?.selectedFormatId ?? null
+	const [selectedWeightId, setSelectedWeightId] = useState(selectedFormatFromState)
 	const [selectedGrind, setSelectedGrind] = useState(grindOptions[0].id)
 	const [quantity, setQuantity] = useState(1)
+
+	// para la eleccion de formato
+	useEffect(() => {
+		setSelectedWeightId(selectedFormatFromState)
+	}, [selectedFormatFromState])
 
 	const productId = useMemo(() => {
 		const idFromQuery = Number(searchParams.get('id'))

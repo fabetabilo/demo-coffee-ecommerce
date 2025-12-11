@@ -45,13 +45,17 @@ export const getProductDetailPath = (product) => {
 export default function useProductDetailNavigation() {
 	const navigate = useNavigate()
 
-	const goToProductDetail = useCallback((product) => {
+	const goToProductDetail = useCallback((product, options = {}) => {
 		if (!product) return
 		const path = getProductDetailPath(product)
 		const params = new URLSearchParams()
 		if (product.id) params.set('id', product.id)
 		const queryString = params.toString()
-		navigate(`${path}${queryString ? `?${queryString}` : ''}`, { state: { product } })
+		const state = {
+			product,
+			selectedFormatId: options.formatId ?? null
+		}
+		navigate(`${path}${queryString ? `?${queryString}` : ''}`, { state })
 	}, [navigate])
 
 	return { goToProductDetail }

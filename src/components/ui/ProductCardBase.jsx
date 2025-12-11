@@ -28,7 +28,8 @@ export default function ProductCardBase({
 	brand,
 	price, 
 	onClick,
-	onAddToCart
+	onAddToCart,
+	extraContent
 }) {
 	// normaliza la categoria y revisa si es cafe
 	const isCafe = String(category || '').toLowerCase() === 'cafes'
@@ -79,6 +80,7 @@ export default function ProductCardBase({
 				<div className="pcb-bottom">
 					{priceLabel && <span className="pcb-price">{priceLabel}</span>}
 				</div>
+				{extraContent && <div className="pcb-extra">{extraContent}</div>}
 			</div>
 		</article>
 	)

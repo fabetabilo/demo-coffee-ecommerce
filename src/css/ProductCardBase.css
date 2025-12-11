@@ -78,6 +78,10 @@
     padding-bottom: 24px;
 }
 
+.pcb-extra {
+	margin-top: 0.35rem;
+}
+
 /* btn agregar al carrito button  */
 .pcb-add-btn {
 	position: absolute;

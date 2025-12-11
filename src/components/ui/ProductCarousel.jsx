@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import '../../css/ProductCarousel.css'
 import ProductCardBase from './ProductCardBase'
+import ProductCardCoffee from './ProductCardCoffee'
 import arrowLeft from '../../assets/icon/arrow-left-s-line.svg'
 import arrowRight from '../../assets/icon/arrow-right-s-line.svg'
 import useCarouselSlide from '../../hooks/useCarouselSlide'
@@ -21,6 +22,7 @@ export default function ProductCarousel({ items = [] }) {
 	})
 
 	const getMinProductPrice = useMinProductPrice()
+	const isCoffeeItem = (item) => String(item?.subcategoria || item?.categoria || '').toLowerCase() === 'cafes'
 
 	return (
 		<div className="pcarousel">
@@ -36,14 +38,18 @@ export default function ProductCarousel({ items = [] }) {
 				<div className="pcarousel-track" ref={trackRef}>
 					{items.map((p) => (
 						<div className="pcarousel-slide" key={p.id}>
-							<ProductCardBase
-								image={p.imagen}
-								title={p.nombre}
-								category={p.subcategoria || p.categoria}	// !!!! TEMPORAAL
-								price={getMinProductPrice(p)}
-								origin={p.origen}
-								brand={p.marca}
-							/>
+							{isCoffeeItem(p) ? (
+								<ProductCardCoffee product={p} />
+							) : (
+								<ProductCardBase
+									image={p.imagen}
+									title={p.nombre}
+									category={p.subcategoria || p.categoria}
+									price={getMinProductPrice(p)}
+									origin={p.origen}
+									brand={p.marca}
+								/>
+							)}
 						</div>
 					))}
 				</div>
