@@ -3,6 +3,7 @@ import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { demoproducts } from '../../data/demo/demo-products'
 import useTotalPrice from '../../hooks/useTotalPrice'
 import ProductImageCarousel from '../../components/ui/ProductImageCarousel'
+import RoastLevel from '../../components/ui/RoastLevel'
 import '../../css/ProductCoffee.css'
 
 const grindOptions = [
@@ -127,18 +128,7 @@ function ProductCoffee() {
 						<p className="product-price">{priceLabel}</p>
 
 						{coffeeProduct && roastLevel > 0 && (
-							<div className="product-roast">
-								<div className="product-roast-head">
-									<span className="product-roast-label">Tueste</span>
-									<span className="product-roast-value">{roastLevel}/7</span>
-								</div>
-								<div className="product-roast-scale" role="img" aria-label={`Nivel de tueste ${roastLevel} de 7`}>
-									{Array.from({ length: 7 }).map((_, index) => {
-										const active = index < roastLevel
-										return <span key={`roast-${index}`} className={`roast-dot ${active ? 'active' : ''}`} />
-									})}
-								</div>
-							</div>
+							<RoastLevel level={roastLevel} max={7} />
 						)}
 
 						<hr className="product-divider" />
@@ -181,7 +171,7 @@ function ProductCoffee() {
 											disabled={!isAvailable}
 										>
 											{option.label}
-											{!isAvailable && <span className="option-unavailable-text"> (No disponible)</span>}
+											{!isAvailable && <span className="option-unavailable-text"></span>}
 										</button>
 									)
 								})}

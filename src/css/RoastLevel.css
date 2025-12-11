@@ -1,0 +1,38 @@
+.roast-level {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.roast-label {
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	font-size: 0.9rem;
+}
+
+.roast-scale {
+	display: flex;
+	gap: 0.35rem;
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+}
+
+.roast-value {
+	font-size: 0.85rem;
+	color: #555;
+}
+
+.roast-dot {
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	border: 1px solid #b7b7b7;
+	background: transparent;
+}
+
+.roast-dot.active {
+	background: #111;
+	border-color: #111;
+}

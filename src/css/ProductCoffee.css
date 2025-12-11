@@ -83,48 +83,6 @@
 	margin: 0 0 2rem;
 }
 
-.product-roast {
-	margin-bottom: 1.5rem;
-}
-
-.product-roast-head {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 0.5rem;
-}
-
-.product-roast-label {
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-	font-size: 0.9rem;
-}
-
-/* !!! TEMPORAL, para ver los niveles */
-.product-roast-value {
-	font-size: 0.85rem;
-	color: #555;
-}
-
-.product-roast-scale {
-	display: flex;
-	gap: 0.35rem;
-}
-
-.roast-dot {
-	width: 14px;
-	height: 14px;
-	border-radius: 50%;
-	border: 1px solid #b7b7b7;
-	background: transparent;
-}
-
-.roast-dot.active {
-	background: #111;
-	border-color: #111;
-}
-
 .product-divider {
 	border: none;
 	border-top: 1px solid #e7e3dc;
