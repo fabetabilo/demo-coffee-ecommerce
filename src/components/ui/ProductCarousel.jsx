@@ -4,6 +4,7 @@ import ProductCardBase from './ProductCardBase'
 import arrowLeft from '../../assets/icon/arrow-left-s-line.svg'
 import arrowRight from '../../assets/icon/arrow-right-s-line.svg'
 import useCarouselSlide from '../../hooks/useCarouselSlide'
+import useMinProductPrice from '../../hooks/useMinProductPrice'
 
 export default function ProductCarousel({ items = [] }) {
 	// mobile: hasta 2, desktop: hasta 5
@@ -18,6 +19,8 @@ export default function ProductCarousel({ items = [] }) {
 		itemCount: items.length,
 		perView: viewportConfig.perView
 	})
+
+	const getMinProductPrice = useMinProductPrice()
 
 	return (
 		<div className="pcarousel">
@@ -37,7 +40,7 @@ export default function ProductCarousel({ items = [] }) {
 								image={p.imagen}
 								title={p.nombre}
 								category={p.subcategoria || p.categoria}	// !!!! TEMPORAAL
-								price={p.precio}
+								price={getMinProductPrice(p)}
 								origin={p.origen}
 								brand={p.marca}
 							/>

@@ -1,5 +1,6 @@
 import React from 'react'
 import ProductCardBase from './ProductCardBase'
+import useMinProductPrice from '../../hooks/useMinProductPrice'
 import '../../css/SectionGallery.css'
 
 export default function SectionGallery({ items = [], className = '', onCardClick, onAddToCart }) {
@@ -14,6 +15,7 @@ export default function SectionGallery({ items = [], className = '', onCardClick
 	const handleAddToCart = typeof onAddToCart === 'function' ? onAddToCart : null
 
 	const containerClassName = ['section-gallery', className].filter(Boolean).join(' ')
+	const getMinProductPrice = useMinProductPrice()
 
 	return (
 		<div className={containerClassName}>
@@ -25,7 +27,7 @@ export default function SectionGallery({ items = [], className = '', onCardClick
 					category={item.subcategoria || item.categoria}
 					origin={item.origen}
 					brand={item.marca}
-					price={item.precio}
+					price={getMinProductPrice(item)}
 					onClick={handleCardClick ? () => handleCardClick(item) : undefined}
 					onAddToCart={handleAddToCart ? () => handleAddToCart(item) : undefined}
 				/>

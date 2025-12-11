@@ -34,6 +34,12 @@ export default function ProductCardBase({
 	const isCafe = String(category || '').toLowerCase() === 'cafes'
 	const displayTitle = isCafe ? `Café ${title}` : title
 	const metaLabel = isCafe ? (origin || '') : (brand || '')
+	const numericPrice = typeof price === 'number' ? price : null
+	let priceLabel = ''
+	if (numericPrice !== null) {
+		const formatted = formatCLP(numericPrice)
+		priceLabel = isCafe ? `Desde ${formatted}` : formatted
+	}
 
 	return (
 		<article className="pcb-card" onClick={onClick} role={onClick ? 'button' : undefined}>
@@ -71,7 +77,7 @@ export default function ProductCardBase({
 				{metaLabel && <div className="pcb-meta">{metaLabel}</div>}
 				<h3 className="pcb-title">{displayTitle}</h3>
 				<div className="pcb-bottom">
-					<span className="pcb-price">{formatCLP(price)}</span>
+					{priceLabel && <span className="pcb-price">{priceLabel}</span>}
 				</div>
 			</div>
 		</article>
