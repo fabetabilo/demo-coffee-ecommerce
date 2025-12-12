@@ -37,8 +37,7 @@ export default function SectionGallery({ items = [], className = '', onCardClick
 				return (
 					<ProductCardBase
 						key={key}
-						image={item.image}
-						images={Array.isArray(item.productImages) ? item.productImages : (item.image ? [item.image] : [])}
+						images={Array.isArray(item.productImages) ? item.productImages : []}
 						title={item.name}
 						category={item.subcategory || item.category}
 						origin={item.origin}

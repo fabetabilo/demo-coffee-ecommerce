@@ -32,14 +32,16 @@ export default function ProductImageCarousel({ images = [], alt = 'imagenes de p
 	})
 
 	if (slides.length === 0) return null
+	// para definir cuando NO es single image
+	const isSingle = slides.length === 1
 
 	return (
 		<div className="pimg-carousel">
-			
-            <button type="button" className="pimg-nav pimg-nav--prev" aria-label="Imagen anterior" onClick={goPrev}>
-				<img src={arrowLeft} alt="" aria-hidden="true" />
-			</button>
-
+			{!isSingle && (
+				<button type="button" className="pimg-nav pimg-nav--prev" aria-label="Imagen anterior" onClick={goPrev}>
+					<img src={arrowLeft} alt="" aria-hidden="true" />
+				</button>
+			)}
 			<div className="pimg-track" ref={trackRef}>
 				{slides.map((slide, idx) => (
 					<div className="pimg-slide" key={`${slide.src}-${idx}`}>
@@ -47,32 +49,34 @@ export default function ProductImageCarousel({ images = [], alt = 'imagenes de p
 					</div>
 				))}
 			</div>
-
-			<button type="button" className="pimg-nav pimg-nav--next" aria-label="Imagen siguiente" onClick={goNext}>
-				<img src={arrowRight} alt="" aria-hidden="true" />
-			</button>
-
-			<div
-				className="pimg-dots"
-				role="tablist"
-				aria-label="Imagenes del producto"
-				onClick={(e) => e.stopPropagation()}
-			>
-				{Array.from({ length: dots }).map((_, idx) => (
-					<button
-						type="button"
-						key={`dot-${idx}`}
-						className={`pimg-dot ${idx === activeIndex ? 'active' : ''}`}
-						aria-label={`Ver imagen ${idx + 1}`}
-						aria-selected={idx === activeIndex}
-						// evita clicks de error, por fuera de los dots
-						onClick={(e) => {
-							e.stopPropagation()
-							scrollToIndex(idx)
-						}}
-					/>
-				))}
-			</div>
+			{!isSingle && (
+				<button type="button" className="pimg-nav pimg-nav--next" aria-label="Imagen siguiente" onClick={goNext}>
+					<img src={arrowRight} alt="" aria-hidden="true" />
+				</button>
+			)}
+			{!isSingle && (
+				<div
+					className="pimg-dots"
+					role="tablist"
+					aria-label="Imagenes del producto"
+					onClick={(e) => e.stopPropagation()}
+				>
+					{Array.from({ length: dots }).map((_, idx) => (
+						<button
+							type="button"
+							key={`dot-${idx}`}
+							className={`pimg-dot ${idx === activeIndex ? 'active' : ''}`}
+							aria-label={`Ver imagen ${idx + 1}`}
+							aria-selected={idx === activeIndex}
+							// evita clicks de error, por fuera de los dots
+							onClick={(e) => {
+								e.stopPropagation()
+								scrollToIndex(idx)
+							}}
+						/>
+					))}
+				</div>
+			)}
 		</div>
 	)
 }

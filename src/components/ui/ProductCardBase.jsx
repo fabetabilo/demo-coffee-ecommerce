@@ -12,7 +12,6 @@ function formatCLP(value) {
 /**
  * ProductCardBase
  * Props:
- * - image: src de la imagen del producto
  * - images: arreglo de imagenes del producto, por ProductImageCarousel
  * - title: nombre del producto
  * - category: categoria a la que pertenece el producto
@@ -25,7 +24,6 @@ function formatCLP(value) {
  * - clickableArea: 'card' | 'media' (por defecto 'card')
  */
 export default function ProductCardBase({ 
-	image, 
 	images,
 	title, 
 	category,
@@ -51,7 +49,7 @@ export default function ProductCardBase({
 	// en mobile evitamos el carrusel en cards para simplificar la interaccion y evita errores de usuario
 	const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 	const hasCarouselImages = Array.isArray(images) && images.length > 1
-	const fallbackImage = Array.isArray(images) && images.length > 0 ? images[0] : image
+	const fallbackImage = Array.isArray(images) && images.length > 0 ? images[0] : null
 
 	return (
 		<article
