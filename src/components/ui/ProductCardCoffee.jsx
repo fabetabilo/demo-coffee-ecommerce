@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import ProductCardBase from './ProductCardBase'
+import RoastLevel from './RoastLevel'
 import useMinProductPrice from '../../hooks/useMinProductPrice'
 import useProductDetailNavigation from '../../hooks/useProductDetailNavigation'
 import '../../css/ProductCardCoffee.css'
@@ -19,6 +20,11 @@ export default function ProductCardCoffee({ product, onCardClick, onAddToCart })
 	}, [product])
 
 	const price = getMinProductPrice(product)
+	const roastLevel = useMemo(() => {
+		if (!product) return 0
+		const level = product.roastLevel ?? product.roastlevel
+		return Number(level) || 0
+	}, [product])
 
 	const navigateToDetail = (formatId = null) => {
 		if (!product) return
@@ -64,6 +70,10 @@ export default function ProductCardCoffee({ product, onCardClick, onAddToCart })
 		</div>
 	)
 
+	const roastLevelNode = roastLevel > 0
+		? <RoastLevel level={roastLevel} max={7} className="roast-level--card" />
+		: null
+
 	return (
 		<ProductCardBase
 			image={product?.image}
@@ -74,6 +84,8 @@ export default function ProductCardCoffee({ product, onCardClick, onAddToCart })
 			price={price}
 			onClick={handleCardClick}
 			onAddToCart={handleAddToCart}
+			clickableArea="media"
+			topContent={roastLevelNode}
 			extraContent={formatPills}
 		/>
 	)

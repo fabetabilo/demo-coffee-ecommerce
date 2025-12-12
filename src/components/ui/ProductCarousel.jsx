@@ -6,6 +6,7 @@ import arrowLeft from '../../assets/icon/arrow-left-s-line.svg'
 import arrowRight from '../../assets/icon/arrow-right-s-line.svg'
 import useCarouselSlide from '../../hooks/useCarouselSlide'
 import useMinProductPrice from '../../hooks/useMinProductPrice'
+import useProductDetailNavigation from '../../hooks/useProductDetailNavigation'
 
 export default function ProductCarousel({ items = [] }) {
 	// mobile: hasta 2, desktop: hasta 5
@@ -23,6 +24,7 @@ export default function ProductCarousel({ items = [] }) {
 
 	const getMinProductPrice = useMinProductPrice()
 	const isCoffeeItem = (item) => String(item?.subcategory || item?.category || '').toLowerCase() === 'cafes'
+	const { goToProductDetail } = useProductDetailNavigation()
 
 	return (
 		<div className="pcarousel">
@@ -48,6 +50,8 @@ export default function ProductCarousel({ items = [] }) {
 									price={getMinProductPrice(p)}
 									origin={p.origin}
 									brand={p.brand}
+									onClick={() => goToProductDetail(p)}
+									clickableArea="media"
 								/>
 							)}
 						</div>

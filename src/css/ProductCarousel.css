@@ -175,7 +175,7 @@
 		height: var(--carousel-nav-size-desktop);
 		border-radius: 50%;
 		background-color: transparent;
-		border: 2px solid;
+		border: 1.5px solid;
 		border-color: #000000;
 		display: inline-flex;
 		align-items: center;

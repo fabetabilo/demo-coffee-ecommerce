@@ -36,3 +36,25 @@
 	background: #111;
 	border-color: #111;
 }
+
+/* Variante para cards de cafe: color y tamaño equivalente al origen */
+.roast-level--card {
+	margin-bottom: 0.25rem;
+}
+
+.roast-level--card .roast-label {
+	font-family: var(--title-font);
+	font-size: 10px;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--text-secondary-color);
+}
+
+.roast-level--card .roast-scale {
+	gap: 0.25rem;
+}
+
+.roast-level--card .roast-dot {
+	width: 8px;
+	height: 8px;
+}

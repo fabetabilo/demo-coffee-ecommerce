@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../css/ProductCardBase.css'
 import cart_icon from '../../assets/icon/shopping-bag-4-line.svg'
+import arrowRight from '../../assets/icon/arrow-right-s-line.svg'
 
 function formatCLP(value) {
 	if (typeof value !== 'number') return value
@@ -19,6 +20,7 @@ function formatCLP(value) {
  * - metaLabel: string (origen si es cafe, o marca si no)
  * - onClick: handler opcional
  * - onAddToCard: handler opcional al hacer click en el boton agregar a carrito
+ * - clickableArea: 'card' | 'media' (por defecto 'card')
  */
 export default function ProductCardBase({ 
 	image, 
@@ -29,22 +31,30 @@ export default function ProductCardBase({
 	price, 
 	onClick,
 	onAddToCart,
-	extraContent
+	extraContent,
+	topContent,
+	clickableArea = 'card'
 }) {
 	// normaliza la categoria y revisa si es cafe
 	const isCafe = String(category || '').toLowerCase() === 'cafes'
 	const displayTitle = isCafe ? `Café ${title}` : title
 	const metaLabel = isCafe ? (origin || '') : (brand || '')
 	const numericPrice = typeof price === 'number' ? price : null
-	let priceLabel = ''
+	let formattedPrice = ''
 	if (numericPrice !== null) {
-		const formatted = formatCLP(numericPrice)
-		priceLabel = isCafe ? `Desde ${formatted}` : formatted
+		formattedPrice = formatCLP(numericPrice)
 	}
 
 	return (
-		<article className="pcb-card" onClick={onClick} role={onClick ? 'button' : undefined}>
-			<div className="pcb-media">
+		<article
+			className="pcb-card"
+			onClick={clickableArea === 'card' ? onClick : undefined}
+			role={onClick && clickableArea === 'card' ? 'button' : undefined}
+		>
+			<div
+				className="pcb-media"
+				onClick={clickableArea === 'media' ? onClick : undefined}
+			>
 				{image && <img src={image} alt={title} />}
 				{/* btn agregar al carrito mobile*/}
 				<button
@@ -75,12 +85,42 @@ export default function ProductCardBase({
 				</button>
 			</div>
 			<div className="pcb-body">
+				{topContent && <div className="pcb-top-extra">{topContent}</div>}
 				{metaLabel && <div className="pcb-meta">{metaLabel}</div>}
 				<h3 className="pcb-title">{displayTitle}</h3>
 				<div className="pcb-bottom">
-					{priceLabel && <span className="pcb-price">{priceLabel}</span>}
+					{formattedPrice && (
+						<span className="pcb-price">
+							{isCafe ? (
+								<>
+									<span className="pcb-price-prefix">A partir de</span>
+									<span className="pcb-price-value">{formattedPrice}</span>
+								</>
+							) : (
+								<span className="pcb-price-value">{formattedPrice}</span>
+							)}
+						</span>
+					)}
 				</div>
 				{extraContent && <div className="pcb-extra">{extraContent}</div>}
+				{onClick && (
+					<button
+						type="button"
+						className="pcb-nav-btn"
+						aria-label="Ver detalle del producto"
+						onClick={(e) => {
+							e.stopPropagation()
+							if (typeof onClick === 'function') onClick()
+						}}
+					>
+						<img
+							src={arrowRight}
+							alt=""
+							aria-hidden="true"
+							className="pcb-nav-icon"
+						/>
+					</button>
+				)}
 			</div>
 		</article>
 	)

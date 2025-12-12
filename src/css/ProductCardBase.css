@@ -23,6 +23,7 @@
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
+	position: relative;
 }
 
 .pcb-media {
@@ -43,8 +44,12 @@
 
 .pcb-body {
 	background: var(--card-bg-secondary);
-	padding: 16px;
-	min-height: 110px;
+	padding: 1rem;
+	min-height: 140px;
+}
+
+.pcb-top-extra {
+	margin-bottom: 0.35rem;
 }
 
 .pcb-meta {
@@ -78,8 +83,63 @@
     padding-bottom: 24px;
 }
 
+.pcb-price-prefix {
+	font-size: var(--font-size-small);
+	font-weight: 200;
+	color: var(--text-primary-color);
+	margin-right: 0.5rem;
+	vertical-align: baseline;
+}
+
+.pcb-price-value {
+	font-family: var(--title-font);
+	font-size: var(--font-size-medium);
+	font-weight: 200;
+	color: var(--text-primary-color);
+}
+
 .pcb-extra {
 	margin-top: 0.35rem;
+}
+
+.pcb-nav-btn {
+	position: absolute;
+	right: 16px;
+	bottom: 16px;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	border: 1.5px solid #111;
+	background: transparent;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: background 180ms ease, border-color 180ms ease;
+	background-clip: padding-box;
+}
+
+.pcb-nav-icon {
+	width: 14px;
+	height: 14px;
+	transition: filter 180ms ease;
+}
+
+.pcb-nav-btn:hover,
+.pcb-card:hover .pcb-nav-btn {
+	background: #111;
+	border-color: #111;
+}
+
+.pcb-nav-btn:hover .pcb-nav-icon,
+.pcb-card:hover .pcb-nav-btn .pcb-nav-icon {
+	filter: invert(1);
+}
+
+@media (max-width: 767px) {
+	.pcb-nav-btn {
+		display: none;
+	}
 }
 
 /* btn agregar al carrito button  */
@@ -136,8 +196,8 @@
 	}
 
 	.pcb-body {
-		padding: 32px;
-		min-height: 110px;
+		padding: 1.4rem;
+		min-height: 140px;
 	}
 
 	.pcb-add-btn { display: none; }
