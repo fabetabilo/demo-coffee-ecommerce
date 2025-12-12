@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { Link, useLocation, useSearchParams } from 'react-router-dom'
-import { demoproducts } from '../../data/demo/demo-products'
+import { Link, useLocation } from 'react-router-dom'
 import useTotalPrice from '../../hooks/useTotalPrice'
 import ProductImageCarousel from '../../components/ui/ProductImageCarousel'
 import RoastLevel from '../../components/ui/RoastLevel'
+import useRouteProduct from '../../hooks/useRouteProduct'
+import useGalleryImages from '../../hooks/useGalleryImages'
 import '../../css/ProductCoffee.css'
 
 const grindOptions = [
@@ -16,9 +17,7 @@ function isCoffee(product) {
 }
 
 function ProductCoffee() {
-	const [searchParams] = useSearchParams()
 	const location = useLocation()
-	const stateProduct = location.state?.product
 	const selectedFormatFromState = location.state?.selectedFormatId ?? null
 	const [selectedWeightId, setSelectedWeightId] = useState(selectedFormatFromState)
 	const [selectedGrind, setSelectedGrind] = useState(grindOptions[0].id)
@@ -29,17 +28,7 @@ function ProductCoffee() {
 		setSelectedWeightId(selectedFormatFromState)
 	}, [selectedFormatFromState])
 
-	const productId = useMemo(() => {
-		const idFromQuery = Number(searchParams.get('id'))
-		if (!Number.isNaN(idFromQuery) && idFromQuery > 0) return idFromQuery
-		return stateProduct?.id ?? null
-	}, [searchParams, stateProduct?.id])
-
-	const product = useMemo(() => {
-		if (!productId && stateProduct) return stateProduct
-		if (stateProduct && stateProduct.id === productId) return stateProduct
-		return demoproducts.find((item) => item.id === productId)
-	}, [productId, stateProduct])
+	const product = useRouteProduct('cafes')
 
 	// formatos de peso derivados desde el producto
 	const weightOptions = useMemo(() => {
@@ -73,14 +62,7 @@ function ProductCoffee() {
 		quantity
 	})
 
-	const galleryImages = useMemo(() => {
-		if (!product) return []
-		const fromProduct = Array.isArray(product.productImages) ? product.productImages.filter(Boolean) : []
-		if (fromProduct.length > 0) return fromProduct
-		const legacy = Array.isArray(product.galleryImages) ? product.galleryImages.filter(Boolean) : []
-		if (legacy.length > 0) return legacy
-		return product.image ? [product.image] : []
-	}, [product])
+	const galleryImages = useGalleryImages(product)
 
 	const handleQuantityChange = (delta) => {
 		setQuantity((prev) => Math.max(1, prev + delta))

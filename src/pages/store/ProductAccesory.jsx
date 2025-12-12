@@ -1,38 +1,18 @@
-import React, { useMemo, useState } from 'react'
-import { Link, useLocation, useSearchParams } from 'react-router-dom'
-import { demoproducts } from '../../data/demo/demo-products'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import useTotalPrice from '../../hooks/useTotalPrice'
 import ProductImageCarousel from '../../components/ui/ProductImageCarousel'
+import useRouteProduct from '../../hooks/useRouteProduct'
+import useGalleryImages from '../../hooks/useGalleryImages'
 import '../../css/ProductAccesory.css'
 
 const isAccessory = (product) => String(product?.category || '').toLowerCase() === 'accesorios'
 
 function ProductAccesory() {
-	const [searchParams] = useSearchParams()
-	const location = useLocation()
-	const stateProduct = location.state?.product
 	const [quantity, setQuantity] = useState(1)
 
-	const productId = useMemo(() => {
-		const idFromQuery = Number(searchParams.get('id'))
-		if (!Number.isNaN(idFromQuery) && idFromQuery > 0) return idFromQuery
-		return stateProduct?.id ?? null
-	}, [searchParams, stateProduct?.id])
-
-	const product = useMemo(() => {
-		if (!productId && stateProduct) return stateProduct
-		if (stateProduct && stateProduct.id === productId) return stateProduct
-		return demoproducts.find((item) => item.id === productId)
-	}, [productId, stateProduct])
-
-	const galleryImages = useMemo(() => {
-		if (!product) return []
-		const fromProduct = Array.isArray(product.productImages) ? product.productImages.filter(Boolean) : []
-		if (fromProduct.length > 0) return fromProduct
-		const legacy = Array.isArray(product.galleryImages) ? product.galleryImages.filter(Boolean) : []
-		if (legacy.length > 0) return legacy
-		return product.image ? [product.image] : []
-	}, [product])
+	const product = useRouteProduct('accesorios')
+	const galleryImages = useGalleryImages(product)
 
 	const { formattedUnit: unitPriceLabel, formattedTotal: totalPriceLabel } = useTotalPrice({
 		unitPrice: product?.price ?? 0,
