@@ -2,6 +2,7 @@ import React from 'react'
 import '../../css/ProductCardBase.css'
 import cart_icon from '../../assets/icon/shopping-bag-4-line.svg'
 import arrowRight from '../../assets/icon/arrow-right-s-line.svg'
+import ProductImageCarousel from './ProductImageCarousel'
 
 function formatCLP(value) {
 	if (typeof value !== 'number') return value
@@ -12,6 +13,7 @@ function formatCLP(value) {
  * ProductCardBase
  * Props:
  * - image: src de la imagen del producto
+ * - images: arreglo de imagenes del producto, por ProductImageCarousel
  * - title: nombre del producto
  * - category: categoria a la que pertenece el producto
  * - origin: pais origen del cafe
@@ -24,6 +26,7 @@ function formatCLP(value) {
  */
 export default function ProductCardBase({ 
 	image, 
+	images,
 	title, 
 	category,
 	origin,
@@ -45,6 +48,11 @@ export default function ProductCardBase({
 		formattedPrice = formatCLP(numericPrice)
 	}
 
+	// en mobile evitamos el carrusel en cards para simplificar la interaccion y evita errores de usuario
+	const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+	const hasCarouselImages = Array.isArray(images) && images.length > 1
+	const fallbackImage = Array.isArray(images) && images.length > 0 ? images[0] : image
+
 	return (
 		<article
 			className="pcb-card"
@@ -55,7 +63,11 @@ export default function ProductCardBase({
 				className="pcb-media"
 				onClick={clickableArea === 'media' ? onClick : undefined}
 			>
-				{image && <img src={image} alt={title} />}
+				{hasCarouselImages && !isMobile ? (
+					<ProductImageCarousel images={images} alt={title} />
+				) : (
+					fallbackImage && <img src={fallbackImage} alt={title} />
+				)}
 				{/* btn agregar al carrito mobile*/}
 				<button
 					className="pcb-add-btn"

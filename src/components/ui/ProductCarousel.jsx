@@ -45,6 +45,7 @@ export default function ProductCarousel({ items = [] }) {
 							) : (
 								<ProductCardBase
 									image={p.image}
+									images={Array.isArray(p.productImages) ? p.productImages : (p.image ? [p.image] : [])}
 									title={p.name}
 									category={p.subcategory || p.category}
 									price={getMinProductPrice(p)}

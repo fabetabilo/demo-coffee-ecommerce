@@ -52,7 +52,12 @@ export default function ProductImageCarousel({ images = [], alt = 'imagenes de p
 				<img src={arrowRight} alt="" aria-hidden="true" />
 			</button>
 
-			<div className="pimg-dots" role="tablist" aria-label="Imagenes del producto">
+			<div
+				className="pimg-dots"
+				role="tablist"
+				aria-label="Imagenes del producto"
+				onClick={(e) => e.stopPropagation()}
+			>
 				{Array.from({ length: dots }).map((_, idx) => (
 					<button
 						type="button"
@@ -60,7 +65,11 @@ export default function ProductImageCarousel({ images = [], alt = 'imagenes de p
 						className={`pimg-dot ${idx === activeIndex ? 'active' : ''}`}
 						aria-label={`Ver imagen ${idx + 1}`}
 						aria-selected={idx === activeIndex}
-						onClick={() => scrollToIndex(idx)}
+						// evita clicks de error, por fuera de los dots
+						onClick={(e) => {
+							e.stopPropagation()
+							scrollToIndex(idx)
+						}}
 					/>
 				))}
 			</div>

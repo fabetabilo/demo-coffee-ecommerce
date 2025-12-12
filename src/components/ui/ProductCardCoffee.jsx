@@ -77,6 +77,7 @@ export default function ProductCardCoffee({ product, onCardClick, onAddToCart })
 	return (
 		<ProductCardBase
 			image={product?.image}
+			images={Array.isArray(product?.productImages) ? product.productImages : (product?.image ? [product.image] : [])}
 			title={product?.name}
 			category={product?.subcategory || product?.category}
 			origin={product?.origin}
