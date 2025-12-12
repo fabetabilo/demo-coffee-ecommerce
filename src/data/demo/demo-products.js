@@ -13,6 +13,14 @@ import especial from './img/especial.png'
 import pinkcolombia from './img/pink.png'
 import nowhitebg from './img/nowhite.png'
 import filter2 from './img/b75filters.png'
+import v60pink2 from './img/v60-2.png'
+import v60pink3 from './img/v60-3.png'
+import buono2 from './img/buono-2.png'
+import chemex2 from './img/chemex-2.png'
+import aero from './img/aero.png'
+import aero2 from './img/aero-2.png'
+import aero3 from './img/aero-3.png'
+import xultra2 from './img/1zpresso-x-ultra-g-2.png'
 
 // productos de demo
 export const demoproducts = [
@@ -141,7 +149,7 @@ export const demoproducts = [
         name: "V60 Rosada",
         price: 9990,
         image: v60pink,
-        productImages: [v60pink],
+        productImages: [v60pink, v60pink2, v60pink3],
         category: "accesorios",
         subcategory: "metodos",
         brand: "Hario",
@@ -152,7 +160,7 @@ export const demoproducts = [
         name: "Chemex 6 tazas",
         price: 39990,
         image: chemex,
-        productImages: [chemex, v60pink],
+        productImages: [chemex, chemex2],
         category: "accesorios",
         subcategory: "metodos",
         brand: "Chemex",
@@ -174,7 +182,7 @@ export const demoproducts = [
         name: "Molino 1ZPresso X-Ultra",
         price: 144990,
         image: xultra,
-        productImages: [xultra],
+        productImages: [xultra, xultra2],
         category: "accesorios",
         subcategory: "molinos",
         brand: "1Zpresso",
@@ -196,7 +204,7 @@ export const demoproducts = [
         name: "Tetera Hario Buono 1L",
         price: 39990,
         image: buono,
-        productImages: [buono],
+        productImages: [buono, buono2],
         category: "accesorios",
         subcategory: "teteras",
         brand: "Hario",
@@ -318,6 +326,17 @@ export const demoproducts = [
         subcategory: "filtros",
         brand: "Timemore",
         description: "Filtros de papel para Timemore B75 con madera importada de Japón. Sin aditivos ni olores para una delicada taza. \nContiene 50 filtros."
+    },
+    {
+        id: 17,
+        name: "Aeropress GO",
+        price: 45990,
+        image: aero,
+        productImages: [aero, aero2, aero3],
+        category: "accesorios",
+        subcategory: "metodos",
+        brand: "Aeropress",
+        description: "Metodo iconico de vidrio con mango de madera ideal para preparar hasta seis tazas limpias y brillantes."
     },
 
 ]

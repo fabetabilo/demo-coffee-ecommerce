@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { demoproducts } from '../../data/demo/demo-products'
 import useTotalPrice from '../../hooks/useTotalPrice'
+import ProductImageCarousel from '../../components/ui/ProductImageCarousel'
 import '../../css/ProductAccesory.css'
 
 const isAccessory = (product) => String(product?.category || '').toLowerCase() === 'accesorios'
@@ -23,6 +24,15 @@ function ProductAccesory() {
 		if (stateProduct && stateProduct.id === productId) return stateProduct
 		return demoproducts.find((item) => item.id === productId)
 	}, [productId, stateProduct])
+
+	const galleryImages = useMemo(() => {
+		if (!product) return []
+		const fromProduct = Array.isArray(product.productImages) ? product.productImages.filter(Boolean) : []
+		if (fromProduct.length > 0) return fromProduct
+		const legacy = Array.isArray(product.galleryImages) ? product.galleryImages.filter(Boolean) : []
+		if (legacy.length > 0) return legacy
+		return product.image ? [product.image] : []
+	}, [product])
 
 	const { formattedUnit: unitPriceLabel, formattedTotal: totalPriceLabel } = useTotalPrice({
 		unitPrice: product?.price ?? 0,
@@ -55,7 +65,7 @@ function ProductAccesory() {
 				<div className="product-layout">
 					<section className="product-hero" aria-labelledby="product-title">
 						<div className="product-hero-frame">
-							<img src={product.image} alt={product.name} loading="lazy" />
+							<ProductImageCarousel images={galleryImages} alt={product.name} />
 						</div>
 					</section>
 					<section className="product-detail" aria-live="polite">
