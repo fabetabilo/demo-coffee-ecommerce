@@ -1,10 +1,13 @@
+/*
+Calcula totales de precio con cantidad, descuentos e impuestos.
+Retorna valores crudos y formateados (CLP por defecto).
+Params: { unitPrice, quantity, discounts: [{type:'percentage'|'fixed', value}], taxRate, currencyFormatter }
+Uso: const { formattedTotal } = useTotalPrice({ unitPrice: 2500, quantity: 2 })
+*/
 import { useMemo } from 'react'
+import formatCurrency, { getCurrencyFormatter } from '../utils/formatCurrency'
 
-const defaultFormatter = new Intl.NumberFormat('es-CL', {
-	style: 'currency',
-	currency: 'CLP',
-	maximumFractionDigits: 0
-})
+const defaultFormatter = getCurrencyFormatter()
 
 // evita cantidades invalidas o menores a 1
 const clampQuantity = (value) => {
@@ -45,8 +48,9 @@ export default function useTotalPrice({
 		const formatter = typeof currencyFormatter?.format === 'function' ? currencyFormatter : null
 
 		const formatValue = (value) => {
-			if (!formatter) return value
-			return formatter.format(Math.round(value))
+			const rounded = Math.round(value)
+			if (formatter) return formatter.format(rounded)
+			return formatCurrency(rounded)
 		}
 
 		return {

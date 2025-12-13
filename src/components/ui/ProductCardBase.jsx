@@ -3,11 +3,7 @@ import '../../css/ProductCardBase.css'
 import cart_icon from '../../assets/icon/shopping-bag-4-line.svg'
 import arrowRight from '../../assets/icon/arrow-right-s-line.svg'
 import ProductImageCarousel from './ProductImageCarousel'
-
-function formatCLP(value) {
-	if (typeof value !== 'number') return value
-	return `$${value.toLocaleString('es-CL')}`
-}
+import formatCurrency from '../../utils/formatCurrency'
 
 /**
  * ProductCardBase
@@ -43,7 +39,7 @@ export default function ProductCardBase({
 	const numericPrice = typeof price === 'number' ? price : null
 	let formattedPrice = ''
 	if (numericPrice !== null) {
-		formattedPrice = formatCLP(numericPrice)
+		formattedPrice = formatCurrency(numericPrice)
 	}
 
 	// en mobile evitamos el carrusel en cards para simplificar la interaccion y evita errores de usuario
