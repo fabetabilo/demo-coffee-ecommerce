@@ -9,6 +9,8 @@ const PRODUCT_ROUTE_MAP = {
 	accesorios: '/tienda/producto/accesorio',
 	accessory: '/tienda/producto/accesorio',
 	accessories: '/tienda/producto/accesorio',
+	pack: '/tienda/producto/pack',
+	packs: '/tienda/producto/pack',
 	suscripcion: '/tienda/producto/subscripcion',
 	suscripciones: '/tienda/producto/subscripcion',
 	subscription: '/tienda/producto/subscripcion',

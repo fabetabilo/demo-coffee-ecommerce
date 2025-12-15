@@ -29,6 +29,15 @@ const ProductService = {
     },
 
     /**
+     * Obtiene la lista de packs.
+     * @returns {Promise<Array>} Lista de packs
+     */
+    getAllPacks: async () => {
+        const response = await api.get('/packs');
+        return response.data;
+    },
+
+    /**
      * Obtiene el detalle de un producto por ID.
      * El backend decide el producto que obtiene
      * @param {number} id 
