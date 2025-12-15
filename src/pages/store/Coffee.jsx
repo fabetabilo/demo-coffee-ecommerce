@@ -9,6 +9,7 @@ import ProductService from '../../services/product.service'
 function Coffee() {
     // IMPORTANTE: filtra cafés (en tiempo real) en cliente dado que no tendrá más de 50 cafés disponibles
     const [coffeeProducts, setCoffeeProducts] = useState(null)
+    const [packProducts, setPackProducts] = useState(null) // <- NUEVO
     const { goToProductDetail } = useProductDetailNavigation()
     const [processFilter, setProcessFilter] = useState('all')
     const filters = useMemo(() => ([
@@ -34,7 +35,20 @@ function Coffee() {
             }
         }
 
+        const fetchPacks = async () => {
+            try {
+                const packs = await ProductService.getAllPacks()
+                if (!isMounted) return
+                setPackProducts(Array.isArray(packs) ? packs : [])
+            } catch (err) {
+                if (!isMounted) return
+                console.error('Error loading packs', err)
+                setPackProducts([])
+            }
+        }
+
         fetchCoffees()
+        fetchPacks()
 
         return () => {
             isMounted = false
@@ -55,6 +69,17 @@ function Coffee() {
             return process === normalized
         })
     }, [coffeeProducts, processFilter])
+
+    const packs = useMemo(
+        () => (Array.isArray(packProducts) ? packProducts : []),
+        [packProducts]
+    )
+
+    // cafés filtrados + packs en la MISMA galería
+    const galleryItems = useMemo(
+        () => [...filteredProducts, ...packs],
+        [filteredProducts, packs]
+    )
 
     const hasSourceProducts = Array.isArray(coffeeProducts) && coffeeProducts.length > 0
 
@@ -99,8 +124,8 @@ function Coffee() {
                             )
                         })}
                     </div>
-                    {filteredProducts.length > 0 && (
-                        <SectionGallery items={filteredProducts} onCardClick={handleCardClick} />
+                    {galleryItems.length > 0 && (
+                        <SectionGallery items={galleryItems} onCardClick={handleCardClick} />
                     )}
                     {hasSourceProducts && filteredProducts.length === 0 && (
                         <p className="page-helper-text">No encontramos cafés con este filtro.</p>

@@ -62,41 +62,12 @@ export default function useRouteProduct(expectedCategory) {
 			}
 		}
 
-		const fetchProduct = async () => {
-			setIsLoading(true)
-			try {
-				const fetchedProduct = await ProductService.getProductById(productId)
-				if (!isMounted) return
-				if (!fetchedProduct) {
-					setProduct(null)
-					setError(new Error('Producto no encontrado.'))
-					return
-				}
-				if (!matchesExpected(fetchedProduct)) {
-					setProduct(null)
-					setError(new Error('El producto no coincide con la categoría solicitada.'))
-					return
-				}
-				setProduct(fetchedProduct)
-				setError(null)
-			} catch (err) {
-				if (!isMounted) return
-				console.error('Error loading product', err)
-				setProduct(null)
-				setError(err)
-			} finally {
-				if (isMounted) {
-					setIsLoading(false)
-				}
-			}
-		}
-
-		fetchProduct()
 
 		return () => {
 			isMounted = false
 		}
-	}, [productId, stateProduct, normalizedExpectedCategory])
+	}, [productId, stateProduct, normalizedExpectedCategory]
+)
 
 	return { product, isLoading, error }
 }
