@@ -53,8 +53,9 @@ export default function useProductDetailNavigation() {
 		const params = new URLSearchParams()
 		if (product.id) params.set('id', product.id)
 		const queryString = params.toString()
+		const shouldAttachProductState = options.attachProductState !== false
 		const state = {
-			product,
+			...(shouldAttachProductState ? { product } : {}),
 			selectedFormatId: options.formatId ?? null
 		}
 		navigate(`${path}${queryString ? `?${queryString}` : ''}`, { state })

@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import useTotalPrice from '../../hooks/useTotalPrice'
 import ProductImageCarousel from '../../components/ui/ProductImageCarousel'
 import useRouteProduct from '../../hooks/useRouteProduct'
 import useGalleryImages from '../../hooks/useGalleryImages'
+import useProductDetailNavigation from '../../hooks/useProductDetailNavigation'
 import '../../css/ProductPack.css'
 
 const isPack = (product) => String(product?.category || '').toLowerCase() === 'packs'
@@ -13,6 +14,7 @@ function ProductPack() {
 
 	const { product } = useRouteProduct('packs')
 	const galleryImages = useGalleryImages(product)
+	const { goToProductDetail } = useProductDetailNavigation()
 
 	const { formattedUnit: unitPriceLabel, formattedTotal: totalPriceLabel } = useTotalPrice({
 		unitPrice: product?.price ?? 0,
@@ -21,6 +23,16 @@ function ProductPack() {
 
 	const handleQuantityChange = (delta) => {
 		setQuantity((prev) => Math.max(1, prev + delta))
+	}
+
+	const items = useMemo(
+		() => (Array.isArray(product?.items) ? product.items : []),
+		[product]
+	)
+
+	const handleItemClick = (originalCoffeeId) => {
+		if (!originalCoffeeId) return
+		goToProductDetail({ id: originalCoffeeId, category: 'cafes' }, { attachProductState: false })
 	}
 
 	if (!product || !isPack(product)) {
@@ -60,6 +72,46 @@ function ProductPack() {
 
 						{product.description && (
 							<p className="product-description">{product.description}</p>
+						)}
+
+						{product.packDescription && (
+							<p className="product-description">{product.packDescription}</p>
+						)}
+
+						{product.additionalDescription && (
+							<p className="product-description">{product.additionalDescription}</p>
+						)}
+
+						{items.length > 0 && (
+							<div className="product-pack-items">
+								<p className="product-option-label">Contenido</p>
+								<ul className="product-pack-items-list">
+									{items.map((item, index) => {
+										const hasCoffeeLink = Boolean(item.originalCoffeeId)
+										return (
+											<li key={index} className="product-pack-item">
+												{item.label && (
+													<span className="product-pack-item-label">{item.label}</span>
+												)}
+												{hasCoffeeLink ? (
+													<button
+														type="button"
+														className="product-pack-item-link"
+														onClick={() => handleItemClick(item.originalCoffeeId)}
+													>
+														{item.name}
+													</button>
+												) : (
+													<span className="product-pack-item-name">{item.name}</span>
+												)}
+												{item.process && (
+													<span className="product-pack-item-process"> — {item.process}</span>
+												)}
+											</li>
+										)
+									})}
+								</ul>
+							</div>
 						)}
 
 						<div className="product-option-group">

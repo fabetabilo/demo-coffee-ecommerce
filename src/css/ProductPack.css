@@ -1,1 +1,49 @@
 @import './ProductCoffee.css';
+
+
+/* Lista de items del pack */
+.product-pack-items {
+	margin-bottom: 1.75rem;
+}
+
+.product-pack-items-list {
+	margin: 0.5rem 0 0;
+	padding-left: 1.25rem;
+}
+
+.product-pack-item {
+	margin-bottom: 0.4rem;
+	font-size: 0.95rem;
+	color: #3c3834;
+}
+
+.product-pack-item-label {
+	font-weight: 500;
+	margin-right: 0.25rem;
+}
+
+.product-pack-item-name {
+	font-weight: 400;
+}
+
+.product-pack-item-link {
+	background: none;
+	border: none;
+	padding: 0;
+	margin: 0;
+	font: inherit;
+	cursor: pointer;
+	font-weight: 600;
+	text-decoration: underline;
+	color: #5a3b23; /* café oscuro sutil */
+}
+
+.product-pack-item-link:hover {
+	color: #3b2716;
+}
+
+.product-pack-item-process {
+	margin-left: 0.25rem;
+	color: #6b655f;
+}
+

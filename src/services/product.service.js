@@ -37,7 +37,16 @@ const ProductService = {
         return response.data;
     },
 
-
+        /**
+     * Obtiene el detalle de un producto por ID.
+     * El backend decide el producto que obtiene
+     * @param {number} id 
+     * @returns {Promise<Object>} Objeto cafe, accesorio, {...}
+     */
+    getProductById: async (id) => {
+        const response = await api.get(`/${id}`);
+        return response.data;
+    },
     
 
 

@@ -48,6 +48,15 @@ function ProductCoffee() {
 	})
 
 	const galleryImages = useGalleryImages(product)
+	// maneja internamente el caso sin product
+	const descriptorText = useMemo(() => {
+		const descriptors = Array.isArray(product?.descriptors) ? product.descriptors : []
+		return descriptors
+			.map((descriptor) => String(descriptor || '').trim())
+			.filter(Boolean)
+			.map((descriptor) => descriptor.toUpperCase())
+			.join(', ')
+	}, [product])
 
 	const handleQuantityChange = (delta) => {
 		setQuantity((prev) => Math.max(1, prev + delta))
@@ -64,15 +73,6 @@ function ProductCoffee() {
 			</main>
 		)
 	}
-
-	const descriptorText = useMemo(() => {
-		const descriptors = Array.isArray(product?.descriptors) ? product.descriptors : []
-		return descriptors
-			.map((descriptor) => String(descriptor || '').trim())
-			.filter(Boolean)
-			.map((descriptor) => descriptor.toUpperCase())
-			.join(', ')
-	}, [product])
 
 	const roastLevel = Number(product.roastLevel || 0)
 
