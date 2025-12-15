@@ -1,11 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import bongoCat from '../assets/img/gif_o.gif'
 import Banner from '../components/ui/Banner'
 import ProductCarousel from '../components/ui/ProductCarousel'
-import { demoproducts } from '../data/demo/demo-products'
+import ProductService from '../services/product.service'
 import '../css/page.css'
 
 function Home() {
+
+	// !!! TEMPORAL: el manejo de productos destacados se hara mas adelante.
+	const [featuredProducts, setFeaturedProducts] = useState(null)
+
+	useEffect(() => {
+		let isMounted = true
+		const fetchFeaturedProducts = async () => {
+			try {
+				const [coffees, accessories] = await Promise.all([
+					ProductService.getAllCoffees(),
+					ProductService.getAllAccessories()
+				])
+				if (!isMounted) return
+				const combined = [...(coffees ?? []), ...(accessories ?? [])]
+				setFeaturedProducts(combined.slice(0, 12)) 
+			} catch (err) {
+				if (!isMounted) return
+				console.error('Error loading featured products', err)
+				setFeaturedProducts([])
+			}
+		}
+
+		fetchFeaturedProducts()
+
+		return () => {
+			isMounted = false
+		}
+	}, [])
+
+	const hasFeaturedProducts = Array.isArray(featuredProducts) && featuredProducts.length > 0
+	const showEmptyState = Array.isArray(featuredProducts) && !hasFeaturedProducts
+
 	return (
 		<main>
 			<Banner 
@@ -22,7 +54,12 @@ function Home() {
 				<section className="page-section">
 					<h2 className="page-heading">Productos destacados</h2>
 					<div className="page-heading-grip" />
-					<ProductCarousel items={demoproducts} />
+					{hasFeaturedProducts && (
+						<ProductCarousel items={featuredProducts} />
+					)}
+					{showEmptyState && (
+						<p className="page-helper-text">No hay productos para mostrar.</p>
+					)}
 				</section>
 			</div>
 

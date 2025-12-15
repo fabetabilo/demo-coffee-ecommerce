@@ -23,7 +23,7 @@ export default function ProductCarousel({ items = [] }) {
 	})
 
 	const getMinProductPrice = useMinProductPrice()
-	const isCoffeeItem = (item) => String(item?.subcategory || item?.category || '').toLowerCase() === 'cafes'
+	const isCoffeeItem = (item) => String(item?.category || '').toLowerCase() === 'cafes'
 	const { goToProductDetail } = useProductDetailNavigation()
 
 	return (

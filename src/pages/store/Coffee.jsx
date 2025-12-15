@@ -1,14 +1,14 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Banner from '../../components/ui/Banner'
 import SectionGallery from '../../components/ui/SectionGallery'
-import { demoproducts } from '../../data/demo/demo-products'
 import coffeeHero from '../../assets/img/sections/cafes.jpg'
 import '../../css/page.css'
 import useProductDetailNavigation from '../../hooks/useProductDetailNavigation'
+import ProductService from '../../services/product.service'
 
 function Coffee() {
-    // !!! TEMPORAL, luego el backend se encarga de GET coffees y filtrar !!!!
-    const coffeeProducts = demoproducts.filter((product) => product.category === 'cafes')
+    // IMPORTANTE: filtra cafés (en tiempo real) en cliente dado que no tendrá más de 50 cafés disponibles
+    const [coffeeProducts, setCoffeeProducts] = useState(null)
     const { goToProductDetail } = useProductDetailNavigation()
     const [processFilter, setProcessFilter] = useState('all')
     const filters = useMemo(() => ([
@@ -19,11 +19,34 @@ function Coffee() {
         { id: 'otros', label: 'Otros' }
     ]), [])
 
+    useEffect(() => {
+        let isMounted = true
+
+        const fetchCoffees = async () => {
+            try {
+                const coffees = await ProductService.getAllCoffees()
+                if (!isMounted) return
+                setCoffeeProducts(Array.isArray(coffees) ? coffees : [])
+            } catch (err) {
+                if (!isMounted) return
+                console.error('Error loading coffees', err)
+                setCoffeeProducts([])
+            }
+        }
+
+        fetchCoffees()
+
+        return () => {
+            isMounted = false
+        }
+    }, [])
+
     const filteredProducts = useMemo(() => {
-        if (processFilter === 'all') return coffeeProducts
+        const list = Array.isArray(coffeeProducts) ? coffeeProducts : []
+        if (processFilter === 'all') return list
         const normalized = processFilter.toLowerCase()
         const known = new Set(['lavado', 'natural', 'honey'])
-        return coffeeProducts.filter((product) => {
+        return list.filter((product) => {
             const process = String(product.process || '').toLowerCase()
             if (!process) return normalized === 'otros'
             if (normalized === 'otros') {
@@ -32,6 +55,8 @@ function Coffee() {
             return process === normalized
         })
     }, [coffeeProducts, processFilter])
+
+    const hasSourceProducts = Array.isArray(coffeeProducts) && coffeeProducts.length > 0
 
     const handleCardClick = useCallback((product) => {
         if (!product) return
@@ -74,7 +99,12 @@ function Coffee() {
                             )
                         })}
                     </div>
-                    <SectionGallery items={filteredProducts} onCardClick={handleCardClick} />
+                    {filteredProducts.length > 0 && (
+                        <SectionGallery items={filteredProducts} onCardClick={handleCardClick} />
+                    )}
+                    {hasSourceProducts && filteredProducts.length === 0 && (
+                        <p className="page-helper-text">No encontramos cafés con este filtro.</p>
+                    )}
                 </section>
             </div>
         </main>

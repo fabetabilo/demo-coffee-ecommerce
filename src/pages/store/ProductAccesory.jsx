@@ -11,7 +11,7 @@ const isAccessory = (product) => String(product?.category || '').toLowerCase() =
 function ProductAccesory() {
 	const [quantity, setQuantity] = useState(1)
 
-	const product = useRouteProduct('accesorios')
+	const { product } = useRouteProduct('accesorios')
 	const galleryImages = useGalleryImages(product)
 
 	const { formattedUnit: unitPriceLabel, formattedTotal: totalPriceLabel } = useTotalPrice({

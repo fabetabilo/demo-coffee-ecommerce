@@ -12,53 +12,38 @@ const grindOptions = [
 	{ id: 'molido', label: 'Molido' }
 ]
 
-function isCoffee(product) {
-	return String(product?.category || '').toLowerCase() === 'cafes'
-}
-
 function ProductCoffee() {
+
 	const location = useLocation()
-	const selectedFormatFromState = location.state?.selectedFormatId ?? null
-	const [selectedWeightId, setSelectedWeightId] = useState(selectedFormatFromState)
+	const preselectedFormatId = location.state?.selectedFormatId ?? null
+	const [selectedFormatId, setSelectedFormatId] = useState(preselectedFormatId)
 	const [selectedGrind, setSelectedGrind] = useState(grindOptions[0].id)
 	const [quantity, setQuantity] = useState(1)
 
-	// para la eleccion de formato
+	const { product } = useRouteProduct('cafes')
+
+	const formats = useMemo(() => (
+		Array.isArray(product?.formats) ? product.formats : []
+	), [product])
+
+	// revisa el formato 
+	const currentFormat = useMemo(() => {
+		if (!formats.length) return null
+		const match = selectedFormatId 
+            ? formats.find(f => f.id === selectedFormatId && f.available !== false) : null
+        // Retornamos match O el primero disponible O el primero de la lista
+        return match ?? formats.find(f => f.available !== false) ?? formats[0]
+    }, [formats, selectedFormatId])
+
+	// actualiza el currentFormat si difiere del formato visual
 	useEffect(() => {
-		setSelectedWeightId(selectedFormatFromState)
-	}, [selectedFormatFromState])
-
-	const product = useRouteProduct('cafes')
-
-	// formatos de peso derivados desde el producto
-	const weightOptions = useMemo(() => {
-		if (!product) return []
-		if (Array.isArray(product.formats) && product.formats.length > 0) {
-			return product.formats
-		}
-		// fallback para productos sin formats/formatos definidos
-		return [
-			{
-				id: 'default',
-				label: '250G',
-				grams: 250,
-				price: product.price,
-				available: true
-			}
-		]
-	}, [product])
-
-	// formato actualmente seleccionado (o primero disponible)
-	const currentWeight = useMemo(() => {
-		if (!weightOptions.length) return null
-		if (!selectedWeightId) {
-			return weightOptions.find((w) => w.available !== false) || weightOptions[0]
-		}
-		return weightOptions.find((w) => w.id === selectedWeightId) || weightOptions[0]
-	}, [weightOptions, selectedWeightId])
+        if (currentFormat && currentFormat.id !== selectedFormatId) {
+            setSelectedFormatId(currentFormat.id)
+        }
+    }, [currentFormat, selectedFormatId])
 
 	const { formattedUnit: unitPriceLabel, formattedTotal: totalPriceLabel } = useTotalPrice({
-		unitPrice: currentWeight?.price ?? product?.price ?? 0,
+		unitPrice: currentFormat?.price ?? product?.price ?? 0,
 		quantity
 	})
 
@@ -80,10 +65,16 @@ function ProductCoffee() {
 		)
 	}
 
-	const coffeeProduct = isCoffee(product)
-	const descriptorList = Array.isArray(product.descriptors) ? product.descriptors : []
-	const roastLevel = coffeeProduct ? Number(product.roastLevel || 0) : 0
-	const priceLabel = unitPriceLabel
+	const descriptorText = useMemo(() => {
+		const descriptors = Array.isArray(product?.descriptors) ? product.descriptors : []
+		return descriptors
+			.map((descriptor) => String(descriptor || '').trim())
+			.filter(Boolean)
+			.map((descriptor) => descriptor.toUpperCase())
+			.join(', ')
+	}, [product])
+
+	const roastLevel = Number(product.roastLevel || 0)
 
 	return (
 		<main>
@@ -97,37 +88,26 @@ function ProductCoffee() {
 					</section>
 					<section className="product-detail" aria-live="polite">
 						<div className="product-meta">
-							{coffeeProduct && product.origin && (
+							{product.origin && (
 								<span className="product-meta-pill">{product.origin}</span>
 							)}
-							{coffeeProduct && product.process && (
+							{product.process && (
 								<span className="product-meta-pill">{product.process}</span>
 							)}
 						</div>
 						<h1 id="product-title" className="product-title">
 							{product.name}
 						</h1>
-						<p className="product-price">{priceLabel}</p>
+						<p className="product-price">{unitPriceLabel}</p>
 
-						{coffeeProduct && roastLevel > 0 && (
+						{roastLevel > 0 && (
 							<RoastLevel level={roastLevel} max={7} />
 						)}
 
 						<hr className="product-divider" />
 
-						{descriptorList.length > 0 && (
-							<p className="product-descriptors">
-								{descriptorList.map((descriptor, index) => {
-									const text = String(descriptor || '').trim()
-									if (!text) return null
-									return (
-										<span key={`${descriptor}-${index}`}>
-											{text.toUpperCase()}
-											{index < descriptorList.length - 1 ? ', ' : ''}
-										</span>
-									)
-								})}
-							</p>
+						{descriptorText && (
+							<p className="product-descriptors">{descriptorText}</p>
 						)}
 
 						{product.description && (
@@ -137,17 +117,20 @@ function ProductCoffee() {
 						<div className="product-option-group">
 							<p className="product-option-label">Formato</p>
 							<div className="product-option-buttons">
-								{weightOptions.map((option) => {
-									const isSelected = currentWeight ? option.id === currentWeight.id : false
+								{formats.map((option) => {
 									const isAvailable = option.available !== false
+									const isSelected = currentFormat ? option.id === currentFormat.id : false
+									const className = ['option-btn', isSelected && 'selected', !isAvailable && 'option-unavailable']
+										.filter(Boolean)
+										.join(' ')
 									return (
 										<button
 											type="button"
 											key={option.id}
-											className={`option-btn ${isSelected ? 'selected' : ''} ${!isAvailable ? 'option-unavailable' : ''}`.trim()}
+											className={className}
 											onClick={() => {
 												if (!isAvailable) return
-												setSelectedWeightId(option.id)
+												setSelectedFormatId(option.id)
 											}}
 											aria-pressed={isSelected}
 											disabled={!isAvailable}

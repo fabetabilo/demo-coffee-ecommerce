@@ -17,7 +17,7 @@ export default function SectionGallery({ items = [], className = '', onCardClick
 
 	const containerClassName = ['section-gallery', className].filter(Boolean).join(' ')
 	const getMinProductPrice = useMinProductPrice()
-	const isCoffeeItem = (item) => String(item?.subcategory || item?.category || '').toLowerCase() === 'cafes'
+	const isCoffeeItem = (item) => String(item?.category || '').toLowerCase() === 'cafes'
 
 	return (
 		<div className={containerClassName}>
