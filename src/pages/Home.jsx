@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import bongoCat from '../assets/img/gif_o.gif'
 import Banner from '../components/ui/Banner'
 import ProductCarousel from '../components/ui/ProductCarousel'
+import RecommendationQuiz from '../components/ui/RecommendationQuiz'
 import ProductService from '../services/product.service'
 import '../css/page.css'
 
@@ -62,7 +63,7 @@ function Home() {
 					)}
 				</section>
 			</div>
-
+				<RecommendationQuiz />
 		</main>
 	)
 }
