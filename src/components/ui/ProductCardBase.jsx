@@ -30,7 +30,8 @@ export default function ProductCardBase({
 	onAddToCart,
 	extraContent,
 	topContent,
-	clickableArea = 'card'
+	clickableArea = 'card',
+	showAddToCart = true
 }) {
 	// normaliza la categoria y revisa si es cafe
 	const isCafe = String(category || '').toLowerCase() === 'cafes'
@@ -63,32 +64,36 @@ export default function ProductCardBase({
 					fallbackImage && <img src={fallbackImage} alt={title} />
 				)}
 				{/* btn agregar al carrito mobile*/}
-				<button
-					className="pcb-add-btn"
-					aria-label="Agregar al carrito"
-					onClick={(e) => {
-						e.stopPropagation()
-						if (typeof onAddToCart === 'function') onAddToCart()
-						e.currentTarget.blur()
-					}}
-				>
-					<img
-						src={cart_icon}
-						alt=""
-						aria-hidden="true"
-					/>
-				</button>
+				{showAddToCart && (
+					<button
+						className="pcb-add-btn"
+						aria-label="Agregar al carrito"
+						onClick={(e) => {
+							e.stopPropagation()
+							if (typeof onAddToCart === 'function') onAddToCart()
+							e.currentTarget.blur()
+						}}
+					>
+						<img
+							src={cart_icon}
+							alt=""
+							aria-hidden="true"
+						/>
+					</button>
+				)}
 
 				{/* btn agregar al carrito desktop */}
-				<button
-					className="pcb-add-btn--desktop"
-					onClick={(e) => {
-						e.stopPropagation()
-						if (typeof onAddToCart === 'function') onAddToCart()
-						e.currentTarget.blur()
-					}}>
-					Agregar al carrito
-				</button>
+				{showAddToCart && (
+					<button
+						className="pcb-add-btn--desktop"
+						onClick={(e) => {
+							e.stopPropagation()
+							if (typeof onAddToCart === 'function') onAddToCart()
+							e.currentTarget.blur()
+						}}>
+						Agregar al carrito
+					</button>
+				)}
 			</div>
 			<div className="pcb-body">
 				{topContent && <div className="pcb-top-extra">{topContent}</div>}

@@ -11,6 +11,7 @@ function Sheet({
 	backdropClassName = '',
 	ariaLabelledBy,
 	ariaDescribedBy,
+	ariaLabel,
 	id,
 	closeOnBackdrop = true,
 	closeOnEsc = true,
@@ -95,6 +96,7 @@ function Sheet({
 				aria-modal={role === 'dialog' ? 'true' : undefined}
 				aria-labelledby={ariaLabelledBy}
 				aria-describedby={ariaDescribedBy}
+				aria-label={ariaLabel}
 				aria-hidden={!isOpen}
 				tabIndex={-1}
 				id={id}

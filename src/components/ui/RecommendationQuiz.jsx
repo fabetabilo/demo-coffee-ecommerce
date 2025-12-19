@@ -1,4 +1,5 @@
-import React, { useEffect, useId, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../../css/RecommendationQuiz.css'
 import Button from './Button'
 import Sheet from './Sheet'
@@ -13,13 +14,12 @@ function RecommendationQuiz() {
 	const [hasStarted, setHasStarted] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 	const [apiError, setApiError] = useState(null)
-	const sheetTitleId = useId()
-	const sheetDescriptionId = useId()
+	const navigate = useNavigate()
 	const totalSteps = quizQuestions.length
 	const currentQuestion = quizQuestions[currentStep]
 	const currentValue = answers[currentQuestion.id]
 	const isLastStep = currentStep === totalSteps - 1
-	const ctaHeadingId = `${sheetTitleId}-cta`
+    
 	const gridQuestionIds = ['brewingMethod', 'flavorPreference']
 	const isGridQuestion = gridQuestionIds.includes(currentQuestion.id)
 
@@ -70,9 +70,14 @@ function RecommendationQuiz() {
 			setIsLoading(true)
 			setApiError(null)
 			const response = await RecommendationService.getRecommendations(answers)
-			// para revisar
-			console.log('Answers:', answers)
-			console.log('Recomendaciones recibidas:', response)
+			const normalized = Array.isArray(response) ? response : []
+			closeSheet()
+			navigate('/recomendacion/resultado', {
+				state: {
+					products: normalized,
+					quizAnswers: answers
+				}
+			})
 
 		} catch (error) {
 			
@@ -85,9 +90,9 @@ function RecommendationQuiz() {
 
 	return (
 		<>
-			<section className="recommendation-quiz" aria-labelledby={ctaHeadingId}>
+			<section className="recommendation-quiz" aria-label="Quiz de recomendación">
 				<div className="recommendation-quiz-content">
-					<h2 id={ctaHeadingId} className="recommendation-quiz-title">
+					<h2 className="recommendation-quiz-title">
 						¿No estás seguro de qué Café o Blend es ideal para ti?
 					</h2>
 				</div>
@@ -99,18 +104,17 @@ function RecommendationQuiz() {
 				onClose={closeSheet}
 				closeOnBackdrop={!hasStarted}
 				className="recommendation-quiz-sheet"
-				ariaLabelledBy={sheetTitleId}
-				ariaDescribedBy={sheetDescriptionId}
+				ariaLabel="Blend Finder"
 			>
 				<div className="sheet-grip" />
 				{!hasStarted ? (
 					<div className="recommendation-quiz-intro">
 						<p className="recommendation-quiz-intro-label">Blend Finder</p>
-						<h2 id={sheetTitleId} className="recommendation-quiz-intro-title">
+						<h2 className="recommendation-quiz-intro-title">
 							4 simples pasos<br />
 							para llegar a tu Café favorito
 						</h2>
-						<p id={sheetDescriptionId} className="recommendation-quiz-intro-copy">
+						<p className="recommendation-quiz-intro-copy">
 							Responde preguntas rápidas y descubre tu nuevo favorito.
 						</p>
 						<Button

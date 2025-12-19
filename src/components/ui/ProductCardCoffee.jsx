@@ -7,7 +7,7 @@ import '../../css/ProductCardCoffee.css'
 
 const isAvailableFormat = (format) => format && format.available !== false
 
-export default function ProductCardCoffee({ product, onCardClick, onAddToCart }) {
+export default function ProductCardCoffee({ product, onCardClick, onAddToCart, showAddToCart = true }) {
 	const getMinProductPrice = useMinProductPrice()
 	const { goToProductDetail } = useProductDetailNavigation()
 
@@ -38,6 +38,7 @@ export default function ProductCardCoffee({ product, onCardClick, onAddToCart })
 	const handleCardClick = () => navigateToDetail()
 
 	const handleAddToCart = () => {
+		if (!showAddToCart) return
 		if (typeof onAddToCart === 'function') {
 			onAddToCart(product)
 			return
@@ -88,6 +89,7 @@ export default function ProductCardCoffee({ product, onCardClick, onAddToCart })
 			clickableArea="media"
 			topContent={roastLevelNode}
 			extraContent={formatPills}
+			showAddToCart={showAddToCart}
 		/>
 	)
 }

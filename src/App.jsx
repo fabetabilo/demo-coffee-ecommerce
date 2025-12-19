@@ -10,6 +10,7 @@ import ProductCoffee from './pages/store/ProductCoffee'
 import ProductAccesory from './pages/store/ProductAccesory'
 import Packs from './pages/store/Packs'
 import ProductPack from './pages/store/ProductPack'
+import QuizResult from './pages/QuizResult'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/tienda/producto/cafe" element={<ProductCoffee />} />
           <Route path="/tienda/producto/accesorio" element={<ProductAccesory />} />
           <Route path="/tienda/producto/pack" element={<ProductPack />} />
+          <Route path="/recomendacion/resultado" element={<QuizResult />} />
         </Routes>
       <Footer />
     </>
