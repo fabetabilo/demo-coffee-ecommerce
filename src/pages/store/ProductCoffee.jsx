@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import useTotalPrice from '../../hooks/useTotalPrice'
 import ProductImageCarousel from '../../components/ui/ProductImageCarousel'
 import RoastLevel from '../../components/ui/RoastLevel'
+import SuitableForCard from '../../components/ui/SuitableForCard'
 import useRouteProduct from '../../hooks/useRouteProduct'
 import useGalleryImages from '../../hooks/useGalleryImages'
 import '../../css/ProductCoffee.css'
@@ -113,6 +114,8 @@ function ProductCoffee() {
 						{product.description && (
 							<p className="product-description">{product.description}</p>
 						)}
+
+						<SuitableForCard methods={product.suitableMethods} />
 
 						<div className="product-option-group">
 							<p className="product-option-label">Formato</p>
