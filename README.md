@@ -23,9 +23,9 @@ Demostrar una base funcional y reusable de una tienda online centrada en café, 
 - Experiencia mobile-first: navegación y vistas optimizadas para móviles.
 - Catálogo navegable: permite ver productos de café y accesorios.
 - Secciones de tienda: organización por categorías (Café, Accesorios, Métodos, Packs, etc.).
-- Detalle de producto: imágenes, niveles de tueste y precios mínimos, formatos disponibles de café.
+- Detalle de producto: imágenes, niveles de tueste, precios mínimos, y formatos disponibles de café.
 - Carruseles de productos e imágenes: exploración rápida y visual.
-- Galerías de tienda y secciones: exploración por colecciones.
+- Obtener una recomendación de producto Café a través de quiz de recomendación. 
 
 ## Stack Tecnológico
 
@@ -34,7 +34,7 @@ Demostrar una base funcional y reusable de una tienda online centrada en café, 
 - React Router para navegación
 - Opcionalmente integrable con backend Java/Spring Boot en proyectos reales (futuro)
 
-- API productos: Integración de servicio de productos para obtener catálogo y detalles de productos. Información y uso: https://github.com/fabetabilo/demo-coffee-ecommerce-product-service
+- API servicio de productos: Integración de servicio de productos para obtener catálogo, detalles de productos y recomendación de producto a través de formulario. Información y uso: https://github.com/fabetabilo/demo-coffee-ecommerce-product-service
 
 ## Requisitos Previos
 
@@ -94,9 +94,4 @@ Esto expone el servidor en tu IP local para acceder desde otros dispositivos en 
 - `src/utils/`: Utilidades como formateo de moneda y helpers generales.
 - `public/preview/preview-1.png`: Imagen de vista previa usada arriba.
 - `public/products/`: Simulación de ruta CDN, S3 de imágenes de productos de API.
-
-## Notas
-
-- El proyecto es una demo; la integración con backend (por ejemplo Java/Spring Boot) para catálogo, recomendaciones o checkout se puede añadir más adelante.
-- Mantiene estilos mobile-first con media queries para desktop.
 
